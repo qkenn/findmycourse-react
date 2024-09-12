@@ -1,27 +1,51 @@
+import { useRef, useState } from 'react';
+
 export function App() {
+  const [courses, setCourses] = useState(null);
+  const searchInputRef = useRef(null);
+
+  function searchCourses(e) {
+    e.preventDefault();
+    const searchQuery = searchInputRef.current.value;
+    if (searchQuery === '') return;
+
+    fetch(`http://127.0.0.1:8080/api/courses?q=${searchQuery}`, {
+      mode: 'cors',
+    })
+      .then((res) => {
+        if (res.status >= 400) {
+          throw new Error('Not Found');
+        }
+
+        return res.json();
+      })
+      .then((data) => {
+        console.log(data);
+        setCourses(data);
+      })
+      .catch((e) => {
+        console.log(e.message);
+      });
+    console.log('form hooked', searchInputRef.current.value);
+  }
+
   return (
     <>
       <header>
-        <h1>Check eligibility for a programme</h1>
-        <form>
+        <form onSubmit={searchCourses}>
           <label>
-            subject stream
-            <select name="stream">
-              <option value="arts">Arts</option>
-              <option value="commerce">Commerce</option>
-              <option value="biology">Biologycal Science</option>
-              <option value="physical">Physical Science</option>
-              <option value="other">Other</option>
-            </select>
+            Search
+            <input type="text" name="q" ref={searchInputRef} />
           </label>
 
-          <label>
-            <input type="text" placeholder="course" />
-          </label>
-
-          <button>Search</button>
+          <button>Submit</button>
         </form>
       </header>
+
+      <ul>
+        {courses &&
+          courses.map((course) => <li key={course.id}>{course.name}</li>)}
+      </ul>
     </>
   );
 }
