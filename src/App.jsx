@@ -6,10 +6,11 @@ export function App() {
 
   function searchCourses(e) {
     e.preventDefault();
-    const searchQuery = searchInputRef.current.value;
-    if (searchQuery === '') return;
 
-    fetch(`http://127.0.0.1:8080/api/courses?q=${searchQuery}`, {
+    const q = searchInputRef.current.value;
+    if (q === '') return;
+
+    fetch('http://localhost:8080/api/courses?' + new URLSearchParams({ q }), {
       mode: 'cors',
     })
       .then((res) => {
@@ -44,7 +45,12 @@ export function App() {
 
       <ul>
         {courses &&
-          courses.map((course) => <li key={course.id}>{course.name}</li>)}
+          courses.map((c) => (
+            <li key={c.id}>
+              <strong>{c.subject?.name}</strong> <span>({c.name})</span>{' '}
+              <span>{c.medium || ''}</span> <span>{c.duration || ''}</span>
+            </li>
+          ))}
       </ul>
     </>
   );
