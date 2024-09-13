@@ -1,15 +1,18 @@
-import { useRef, useState } from 'react';
+import { createContext, useRef, useState } from 'react';
+import { Header } from './components/Header';
+import { ProgrammesList } from './components/ProgrammesList';
+export const HeaderContext = createContext();
 
 export function App() {
   const [courses, setCourses] = useState(null);
   const [searchError, setSearchError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const searchInputRef = useRef(null);
 
-  function searchCourses(e) {
+  function searchCourses(e, q) {
     e.preventDefault();
-    const q = searchInputRef.current.value;
     if (q === '') return;
+
+    console.log(q);
 
     setIsLoading(true);
     setSearchError(false);
@@ -38,29 +41,15 @@ export function App() {
 
   return (
     <>
-      <header>
-        <form onSubmit={searchCourses}>
-          <label>
-            Search
-            <input type="text" name="q" ref={searchInputRef} className="ring" />
-          </label>
+      <HeaderContext.Provider value={{ searchCourses }}>
+        <Header />
+      </HeaderContext.Provider>
 
-          <button className="ml-5 border-4">Submit</button>
-        </form>
-      </header>
-
-      <ul className="mt-10">
-        {courses &&
-          courses.map((c) => (
-            <li key={c.id}>
-              <strong>{c.subject?.name}</strong> <span>({c.name})</span>{' '}
-              <span>{c.medium || ''}</span> <span>{c.duration || ''}</span>
-            </li>
-          ))}
-      </ul>
-
-      {searchError && <p>Not found</p>}
-      {isLoading && <p>Loading...</p>}
+      <ProgrammesList
+        courses={courses}
+        searchError={searchError}
+        isLoading={isLoading}
+      />
     </>
   );
 }
