@@ -1,6 +1,5 @@
 import { createContext, useRef, useState } from 'react';
 import { Header } from './components/Header';
-import { ProgrammesList } from './components/ProgrammesList';
 import { MainContent } from './components/MainContent';
 export const HeaderContext = createContext();
 
@@ -9,6 +8,7 @@ export function App() {
   const [searchError, setSearchError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [universityFilter, setUniversityFilter] = useState('');
+  const [subjectFilter, setSubjectFilter] = useState('');
 
   function searchCourses(e, q) {
     e.preventDefault();
@@ -45,11 +45,32 @@ export function App() {
     setUniversityFilter(newValue);
   }
 
-  const filteredCourses =
-    courses &&
-    (universityFilter === '' || universityFilter == 'all'
-      ? courses
-      : courses.filter((c) => c.university?.name?.includes(universityFilter)));
+  function filterBySubject(newValue) {
+    setSubjectFilter(newValue);
+  }
+
+  const filteredCourses = courses && filterCourses();
+
+  function filterCourses() {
+    let clonedCourses = [...courses];
+
+    if (universityFilter && universityFilter !== 'All') {
+      clonedCourses = clonedCourses.filter((c) =>
+        c.university?.name
+          .toLowerCase()
+          .includes(universityFilter.toLowerCase())
+      );
+    }
+
+    if (subjectFilter && subjectFilter !== 'All') {
+      clonedCourses = clonedCourses.filter(
+        (c) => c.subject?.name.toLowerCase() === subjectFilter.toLowerCase()
+      );
+    }
+    console.log(universityFilter, subjectFilter);
+
+    return clonedCourses;
+  }
 
   return (
     <>
@@ -59,6 +80,7 @@ export function App() {
 
       <MainContent
         filterByUniversity={filterByUniversity}
+        filterBySubject={filterBySubject}
         courses={filteredCourses}
         searchError={searchError}
         isLoading={isLoading}
