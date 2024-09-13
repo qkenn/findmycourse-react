@@ -1,6 +1,6 @@
 export function ProgrammesList({ courses, searchError, isLoading }) {
   return (
-    <ul className="mx-auto mt-10 max-w-[60rem]">
+    <ul className="max-w-main col-span-8 col-start-5 mx-auto">
       {courses &&
         courses.map((c) => (
           <li key={c.id}>

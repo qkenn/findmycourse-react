@@ -1,12 +1,14 @@
 import { createContext, useRef, useState } from 'react';
 import { Header } from './components/Header';
 import { ProgrammesList } from './components/ProgrammesList';
+import { MainContent } from './components/MainContent';
 export const HeaderContext = createContext();
 
 export function App() {
-  const [courses, setCourses] = useState(null);
+  const [courses, setCourses] = useState([]);
   const [searchError, setSearchError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [universityFilter, setUniversityFilter] = useState('');
 
   function searchCourses(e, q) {
     e.preventDefault();
@@ -39,14 +41,25 @@ export function App() {
       .finally(() => setIsLoading(false));
   }
 
+  function filterByUniversity(newValue) {
+    setUniversityFilter(newValue);
+  }
+
+  const filteredCourses =
+    courses &&
+    (universityFilter === '' || universityFilter == 'all'
+      ? courses
+      : courses.filter((c) => c.university?.name?.includes(universityFilter)));
+
   return (
     <>
       <HeaderContext.Provider value={{ searchCourses }}>
         <Header />
       </HeaderContext.Provider>
 
-      <ProgrammesList
-        courses={courses}
+      <MainContent
+        filterByUniversity={filterByUniversity}
+        courses={filteredCourses}
         searchError={searchError}
         isLoading={isLoading}
       />
