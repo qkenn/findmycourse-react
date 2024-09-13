@@ -2,13 +2,18 @@ import { useRef, useState } from 'react';
 
 export function App() {
   const [courses, setCourses] = useState(null);
+  const [searchError, setSearchError] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const searchInputRef = useRef(null);
 
   function searchCourses(e) {
     e.preventDefault();
-
     const q = searchInputRef.current.value;
     if (q === '') return;
+
+    setIsLoading(true);
+    setSearchError(false);
+    setCourses(null);
 
     fetch('http://localhost:8080/api/courses?' + new URLSearchParams({ q }), {
       mode: 'cors',
@@ -25,9 +30,10 @@ export function App() {
         setCourses(data);
       })
       .catch((e) => {
+        setSearchError(true);
         console.log(e.message);
-      });
-    console.log('form hooked', searchInputRef.current.value);
+      })
+      .finally(() => setIsLoading(false));
   }
 
   return (
@@ -36,14 +42,14 @@ export function App() {
         <form onSubmit={searchCourses}>
           <label>
             Search
-            <input type="text" name="q" ref={searchInputRef} />
+            <input type="text" name="q" ref={searchInputRef} className="ring" />
           </label>
 
-          <button>Submit</button>
+          <button className="ml-5 border-4">Submit</button>
         </form>
       </header>
 
-      <ul>
+      <ul className="mt-10">
         {courses &&
           courses.map((c) => (
             <li key={c.id}>
@@ -52,6 +58,9 @@ export function App() {
             </li>
           ))}
       </ul>
+
+      {searchError && <p>Not found</p>}
+      {isLoading && <p>Loading...</p>}
     </>
   );
 }
