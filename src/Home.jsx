@@ -1,9 +1,9 @@
-import { createContext, useRef, useState } from 'react';
+import { createContext, useState } from 'react';
 import { Header } from './components/Header';
 import { MainContent } from './components/MainContent';
 export const HeaderContext = createContext();
 
-export function App() {
+export function Home() {
   const [courses, setCourses] = useState([]);
   const [searchError, setSearchError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
