@@ -18,7 +18,7 @@ export function Home() {
 
     setIsLoading(true);
     setSearchError(false);
-    setCourses(null);
+    setCourses([]);
 
     fetch('http://localhost:8080/api/courses?' + new URLSearchParams({ q }), {
       mode: 'cors',
@@ -74,19 +74,23 @@ export function Home() {
     return clonedCourses;
   }
 
+  console.log(courses);
+
   return (
     <>
       <HeaderContext.Provider value={{ searchCourses }}>
         <Header />
       </HeaderContext.Provider>
 
-      <MainContent
-        filterByUniversity={filterByUniversity}
-        filterBySubject={filterBySubject}
-        courses={filteredCourses}
-        searchError={searchError}
-        isLoading={isLoading}
-      />
+      {courses.length > 0 && (
+        <MainContent
+          filterByUniversity={filterByUniversity}
+          filterBySubject={filterBySubject}
+          courses={filteredCourses}
+          searchError={searchError}
+          isLoading={isLoading}
+        />
+      )}
     </>
   );
 }

@@ -9,7 +9,7 @@ export function MainContent({
   filterBySubject,
 }) {
   return (
-    <main className="max-w-main mx-auto mt-10 grid grid-cols-12 gap-10">
+    <main className="mx-auto mt-10 grid max-w-main grid-cols-12 gap-10">
       <Filters
         filterByUniversity={filterByUniversity}
         filterBySubject={filterBySubject}
