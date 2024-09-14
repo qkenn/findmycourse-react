@@ -36,9 +36,11 @@ export function Home() {
       })
       .catch((e) => {
         setSearchError(true);
-        console.log(e.message);
+        console.warn(e.message);
       })
-      .finally(() => setIsLoading(false));
+      .finally(() => {
+        setIsLoading(false);
+      });
   }
 
   function filterByUniversity(newValue) {
