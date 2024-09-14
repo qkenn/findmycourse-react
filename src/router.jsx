@@ -20,9 +20,27 @@ export const router = createBrowserRouter([
         path: '/explore',
         children: [
           { index: true, element: <Explore /> },
-          { path: 'subjects', element: <Subjects /> },
-          { path: 'programmes', element: <Programmes /> },
-          { path: 'universities', element: <Universities /> },
+          {
+            path: 'subjects',
+            element: <Subjects />,
+            loader: ({ request: { signal } }) => {
+              return fetch('http://localhost:8080/api/subjects', signal);
+            },
+          },
+          {
+            path: 'programmes',
+            element: <Programmes />,
+            loader: ({ request: { signal } }) => {
+              return fetch('http://localhost:8080/api/courses', signal);
+            },
+          },
+          {
+            path: 'universities',
+            element: <Universities />,
+            loader: ({ request: { signal } }) => {
+              return fetch('http://localhost:8080/api/universities', signal);
+            },
+          },
         ],
       },
       { path: '/check-eligibility', element: <h1>Check Eligibiliity page</h1> },

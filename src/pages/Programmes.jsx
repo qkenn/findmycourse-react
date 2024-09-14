@@ -1,12 +1,18 @@
-import { Link } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
 
 export function Programmes() {
+  const programmes = useLoaderData();
+
   return (
     <main className="mx-auto mt-10 max-w-main">
       <Link to=".." className="underline">
         go back
       </Link>
-      <p>A list of Programmes</p>
+      <ul>
+        {programmes.map((p) => (
+          <li key={p.id}>{p.name}</li>
+        ))}
+      </ul>
     </main>
   );
 }
