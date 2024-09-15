@@ -8,12 +8,14 @@ export function Hero() {
   return (
     <div className="bg-red-200">
       <div className="mx-auto flex max-w-main flex-col py-28">
-        <h1 className="text-4xl font-semibold">Search for degree programmes</h1>
+        <h1 className="text-center text-4xl font-semibold">
+          Search for degree programmes
+        </h1>
         <form
-          className="mt-7 flex items-center"
+          className="mx-auto mt-7 flex items-center"
           onSubmit={(e) => searchCourses(e, searchInputRef.current.value)}
         >
-          <label className="flex-grow">
+          <label className="w-[30rem]">
             <input
               type="text"
               name="q"

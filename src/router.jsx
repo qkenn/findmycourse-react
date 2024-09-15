@@ -5,6 +5,7 @@ import { Explore } from './pages/Explore';
 import { Subjects } from './pages/Subjects';
 import { Universities } from './pages/Universities';
 import { Programmes } from './pages/Programmes';
+import { Courses } from './pages/Courses';
 
 export const router = createBrowserRouter([
   {
@@ -28,10 +29,17 @@ export const router = createBrowserRouter([
             },
           },
           {
+            path: 'courses',
+            element: <Courses />,
+            loader: ({ request: { signal } }) => {
+              return fetch('http://localhost:8080/api/courses', signal);
+            },
+          },
+          {
             path: 'programmes',
             element: <Programmes />,
             loader: ({ request: { signal } }) => {
-              return fetch('http://localhost:8080/api/courses', signal);
+              return fetch('http://localhost:8080/api/programmes', signal);
             },
           },
           {

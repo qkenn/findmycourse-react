@@ -12,6 +12,11 @@ export function Explore() {
             </Link>
           </li>
           <li>
+            <Link to="courses" className="underline">
+              Courses
+            </Link>
+          </li>
+          <li>
             <Link to="programmes" className="underline">
               Degree Programmes
             </Link>
