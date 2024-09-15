@@ -29,7 +29,6 @@ export function Hero() {
               <img
                 className="absolute left-4 top-[1.45rem] -translate-y-1/2 transform"
                 src="/search_black_24dp.svg"
-                alt="search icon"
               />
             </div>
           </label>

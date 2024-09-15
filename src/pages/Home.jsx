@@ -85,15 +85,13 @@ export function Home() {
         <Header />
       </HeaderContext.Provider>
 
-      {courses.length > 0 && (
-        <MainContent
-          filterByUniversity={filterByUniversity}
-          filterBySubject={filterBySubject}
-          courses={filteredCourses}
-          searchError={searchError}
-          isLoading={isLoading}
-        />
-      )}
+      <MainContent
+        filterByUniversity={filterByUniversity}
+        filterBySubject={filterBySubject}
+        courses={filteredCourses}
+        searchError={searchError}
+        isLoading={isLoading}
+      />
     </>
   );
 }
