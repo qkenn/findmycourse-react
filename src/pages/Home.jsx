@@ -12,7 +12,7 @@ export function Home() {
 
   function searchCourses(e, q) {
     e.preventDefault();
-    if (q === '') return;
+    // if (q === '') return;
 
     console.log(q);
 
