@@ -2,8 +2,8 @@ import { NavLink } from 'react-router-dom';
 
 export function Nav() {
   return (
-    <nav className="py-8">
-      <ul className="mx-auto flex max-w-[60rem] justify-end gap-5">
+    <nav className="bg-slate-950 py-5 text-slate-100">
+      <ul className="mx-auto flex max-w-[60rem] justify-end gap-12">
         <li>
           <NavLink to="/">Home</NavLink>
         </li>

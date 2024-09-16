@@ -20,10 +20,11 @@ export function Hero() {
             <span className="text-sm">Courses and programmes</span>
             <div className="relative">
               <input
+                autoFocus
                 type="text"
                 name="q"
                 placeholder="Keywords e.g subject/programme name/location"
-                className="mt-1 w-full rounded-sm border-none px-5 py-2 pl-12 outline-slate-800 placeholder:text-slate-400 focus:outline-[1px]"
+                className="mt-1 w-full rounded-sm border-[1px] border-slate-100 px-5 py-2 pl-12 placeholder:text-slate-400 focus:border-slate-800 focus:outline-none"
                 ref={searchInputRef}
               />
               <img
@@ -33,7 +34,7 @@ export function Hero() {
             </div>
           </label>
 
-          <button className="ml-5 self-end rounded-sm bg-slate-900 px-5 py-2 text-white">
+          <button className="ml-5 self-end rounded-sm border-[1px] border-slate-900 bg-slate-900 px-8 py-2 text-white transition-colors focus:bg-slate-700 focus:outline-none">
             Find
           </button>
         </form>

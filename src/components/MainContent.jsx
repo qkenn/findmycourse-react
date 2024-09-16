@@ -9,16 +9,18 @@ export function MainContent({
   filterBySubject,
 }) {
   return (
-    <main className="mx-auto mt-10 grid max-w-main grid-cols-12 gap-10">
-      <Filters
-        filterByUniversity={filterByUniversity}
-        filterBySubject={filterBySubject}
-      />
-      <ProgrammesList
-        courses={courses}
-        searchError={searchError}
-        isLoading={isLoading}
-      />
+    <main className="my-10 px-5">
+      <div className="mx-auto grid max-w-[62.5rem] grid-cols-12 gap-10">
+        <Filters
+          filterByUniversity={filterByUniversity}
+          filterBySubject={filterBySubject}
+        />
+        <ProgrammesList
+          courses={courses}
+          searchError={searchError}
+          isLoading={isLoading}
+        />
+      </div>
     </main>
   );
 }

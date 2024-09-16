@@ -3,5 +3,10 @@
 @tailwind utilities;
 
 .active {
-  @apply underline;
+  @apply font-semibold text-white;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('/InterVariable.woff2');
 }
