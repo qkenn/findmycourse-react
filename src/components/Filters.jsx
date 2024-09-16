@@ -1,3 +1,6 @@
+import subjects from '../data/subjects.json';
+import universities from '../data/universities.json';
+
 export function Filters({ filterByUniversity, filterBySubject }) {
   return (
     <div className="col-span-4 self-start bg-slate-100 p-3">
@@ -16,8 +19,11 @@ export function Filters({ filterByUniversity, filterBySubject }) {
             onChange={(e) => filterByUniversity(e.target.value)}
           >
             <option value="All">All Universities</option>
-            <option value="Moratuwa">Moratuwa University</option>
-            <option value="Kelaniya">Kelaniya University</option>
+            {universities.map((u) => (
+              <option key={u.id} value={u.name}>
+                {u.name}
+              </option>
+            ))}
           </select>
         </div>
 
@@ -33,14 +39,11 @@ export function Filters({ filterByUniversity, filterBySubject }) {
             onChange={(e) => filterBySubject(e.target.value)}
           >
             <option value="All">All Subjects</option>
-            <option value="Medicine">Medicine</option>
-            <option value="Quantity Surveying">Quantity Surveying</option>
-            <option value="Management and Information Technology">
-              Management and Information Technology
-            </option>
-            <option value="Information Technology">
-              Information Technology
-            </option>
+            {subjects.map((s) => (
+              <option key={s.id} value={s.name}>
+                {s.name}
+              </option>
+            ))}
           </select>
         </div>
       </div>
