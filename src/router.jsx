@@ -6,6 +6,10 @@ import { Subjects } from './pages/Subjects';
 import { Universities } from './pages/Universities';
 import { Programmes } from './pages/Programmes';
 import { Courses } from './pages/Courses';
+import { SubjectDetailPage } from './pages/SubjectDetailPage';
+import { CourseDetailPage } from './pages/CourseDetailPage';
+import { ProgrammeDetailPage } from './pages/ProgrammeDetailPage';
+import { UniversityDetailPage } from './pages/UniversityDetailPage';
 
 export const router = createBrowserRouter([
   {
@@ -23,31 +27,94 @@ export const router = createBrowserRouter([
           { index: true, element: <Explore /> },
           {
             path: 'subjects',
-            element: <Subjects />,
-            loader: ({ request: { signal } }) => {
-              return fetch('http://localhost:8080/api/subjects', signal);
-            },
+            children: [
+              {
+                index: true,
+                element: <Subjects />,
+                loader: ({ request: { signal } }) => {
+                  return fetch('http://localhost:8080/api/subjects', signal);
+                },
+              },
+              {
+                path: ':id',
+                element: <SubjectDetailPage />,
+                loader: ({ params: { id }, request: { signal } }) => {
+                  return fetch(
+                    `http://localhost:8080/api/subjects/${id}`,
+                    signal
+                  );
+                },
+              },
+            ],
           },
           {
             path: 'courses',
-            element: <Courses />,
-            loader: ({ request: { signal } }) => {
-              return fetch('http://localhost:8080/api/courses', signal);
-            },
+            children: [
+              {
+                index: true,
+                element: <Courses />,
+                loader: ({ request: { signal } }) => {
+                  return fetch('http://localhost:8080/api/courses', signal);
+                },
+              },
+              {
+                path: ':id',
+                element: <CourseDetailPage />,
+                loader: ({ params: { id }, request: { signal } }) => {
+                  return fetch(
+                    `http://localhost:8080/api/courses/${id}`,
+                    signal
+                  );
+                },
+              },
+            ],
           },
           {
             path: 'programmes',
-            element: <Programmes />,
-            loader: ({ request: { signal } }) => {
-              return fetch('http://localhost:8080/api/programmes', signal);
-            },
+            children: [
+              {
+                index: true,
+                element: <Programmes />,
+                loader: ({ request: { signal } }) => {
+                  return fetch('http://localhost:8080/api/programmes', signal);
+                },
+              },
+              {
+                path: ':id',
+                element: <ProgrammeDetailPage />,
+                loader: ({ params: { id }, request: { signal } }) => {
+                  return fetch(
+                    `http://localhost:8080/api/programmes/${id}`,
+                    signal
+                  );
+                },
+              },
+            ],
           },
           {
             path: 'universities',
-            element: <Universities />,
-            loader: ({ request: { signal } }) => {
-              return fetch('http://localhost:8080/api/universities', signal);
-            },
+            children: [
+              {
+                index: true,
+                element: <Universities />,
+                loader: ({ request: { signal } }) => {
+                  return fetch(
+                    'http://localhost:8080/api/universities',
+                    signal
+                  );
+                },
+              },
+              {
+                path: ':id',
+                element: <UniversityDetailPage />,
+                loader: ({ params: { id }, request: { signal } }) => {
+                  return fetch(
+                    `http://localhost:8080/api/universities/${id}`,
+                    signal
+                  );
+                },
+              },
+            ],
           },
         ],
       },
