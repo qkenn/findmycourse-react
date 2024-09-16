@@ -3,7 +3,7 @@ import universities from '../data/universities.json';
 
 export function Filters({ filterByUniversity, filterBySubject }) {
   return (
-    <div className="col-span-4 self-start bg-slate-100 p-3">
+    <div className="col-span-4 self-start rounded-sm bg-slate-100 p-3">
       <h3 className="text-2xl font-semibold">Filters</h3>
 
       <div className="mt-5 flex flex-col gap-2">
