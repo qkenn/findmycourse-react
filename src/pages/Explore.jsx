@@ -1,31 +1,26 @@
-import { Link } from 'react-router-dom';
+import { ExploreCard } from '../components/ExploreCard';
 
 export function Explore() {
   return (
     <>
-      <main className="mx-auto mt-10 max-w-main">
-        <h1>Explore page</h1>
-        <ul className="mt-5">
-          <li>
-            <Link to="subjects" className="underline">
-              Subjects
-            </Link>
-          </li>
-          <li>
-            <Link to="courses" className="underline">
-              Courses
-            </Link>
-          </li>
-          <li>
-            <Link to="programmes" className="underline">
-              Degree Programmes
-            </Link>
-          </li>
-          <li>
-            <Link to="universities" className="underline">
-              Universities
-            </Link>
-          </li>
+      <main className="mx-auto my-20 max-w-main">
+        <ul className="mt-5 grid grid-cols-2 gap-12">
+          <ExploreCard
+            url="subjects"
+            desc="All courses offered by universities grouped into relevent subjects"
+          />
+          <ExploreCard
+            url="courses"
+            desc="List of courses offered by universities"
+          />
+          <ExploreCard
+            url="programmes"
+            desc="List of all available degree programmes"
+          />
+          <ExploreCard
+            url="universities"
+            desc="List of all state universites and institutes"
+          />
         </ul>
       </main>
     </>
