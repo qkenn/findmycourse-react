@@ -2,55 +2,33 @@ import { useContext } from 'react';
 import subjects from '../data/subjects.json';
 import universities from '../data/universities.json';
 import { ProgrammeContext } from '../pages/HomePage';
+import { Filter } from './Filter';
 
 export function Filters() {
   const { filterBySubject, filterByUniversity } = useContext(ProgrammeContext);
 
   return (
-    <div className="col-span-4 self-start rounded-sm bg-white p-7">
+    <section className="col-span-4 self-start rounded-sm bg-white p-7">
       <h3 className="text-2xl font-semibold">Filters</h3>
 
-      <div className="mt-5 flex flex-col gap-4">
-        <label className="relative">
-          University
-          <select
-            name="university"
-            className="mt-2 w-full appearance-none px-4 py-2"
-            onChange={(e) => filterByUniversity(e.target.value)}
-          >
-            <option value="All">All Universities</option>
-            {universities.map((u) => (
-              <option key={u.id} value={u.name}>
-                {u.name}
-              </option>
-            ))}
-          </select>
-          <img
-            src="/arrow_down-black-87.svg"
-            className="pointer-events-none absolute right-4 top-10"
-          />
-        </label>
+      <form
+        className="mt-5 flex flex-col gap-4"
+        onSubmit={(e) => e.preventDefault()}
+      >
+        <Filter
+          type="University"
+          defaultOption="All Universities"
+          filterHandler={filterByUniversity}
+          options={universities}
+        />
 
-        <label className="relative">
-          Subject
-          <select
-            name="subject"
-            className="mt-2 w-full appearance-none px-4 py-2"
-            onChange={(e) => filterBySubject(e.target.value)}
-          >
-            <option value="All">All Subjects</option>
-            {subjects.map((s) => (
-              <option key={s.id} value={s.name}>
-                {s.name}
-              </option>
-            ))}
-          </select>
-          <img
-            src="/arrow_down-black-87.svg"
-            className="pointer-events-none absolute right-4 top-10"
-          />
-        </label>
-      </div>
-    </div>
+        <Filter
+          type="Subject"
+          defaultOption="All Subjects"
+          filterHandler={filterBySubject}
+          options={subjects}
+        />
+      </form>
+    </section>
   );
 }
