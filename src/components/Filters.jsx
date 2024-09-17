@@ -1,7 +1,11 @@
+import { useContext } from 'react';
 import subjects from '../data/subjects.json';
 import universities from '../data/universities.json';
+import { ProgrammeContext } from '../pages/HomePage';
 
-export function Filters({ filterByUniversity, filterBySubject }) {
+export function Filters() {
+  const { filterBySubject, filterByUniversity } = useContext(ProgrammeContext);
+
   return (
     <div className="col-span-4 self-start rounded-sm bg-white p-7">
       <h3 className="text-2xl font-semibold">Filters</h3>

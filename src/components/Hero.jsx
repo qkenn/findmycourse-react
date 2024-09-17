@@ -1,9 +1,7 @@
-import { useContext, useRef } from 'react';
-import { HeaderContext } from '../pages/HomePage';
+import { useRef } from 'react';
 
-export function Hero() {
+export function Hero({ searchProgrammes }) {
   const searchInputRef = useRef(null);
-  const { searchCourses } = useContext(HeaderContext);
 
   return (
     <div className="bg-white">
@@ -13,7 +11,7 @@ export function Hero() {
         </h1>
         <form
           className="mx-auto mt-10 flex items-center"
-          onSubmit={(e) => searchCourses(e, searchInputRef.current.value)}
+          onSubmit={(e) => searchProgrammes(e, searchInputRef.current.value)}
           autoComplete="off"
         >
           <label className="w-[30rem]">

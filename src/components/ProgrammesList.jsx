@@ -1,10 +1,14 @@
+import { useContext } from 'react';
+import { ProgrammeContext } from '../pages/HomePage';
 import { Link } from 'react-router-dom';
 
-export function ProgrammesList({ courses, searchError, isLoading }) {
+export function ProgrammesList() {
+  const { programmes, filteredCourses } = useContext(ProgrammeContext);
+
   return (
     <ul className="col-span-8 flex flex-col gap-10">
-      {courses &&
-        courses.map((p) => (
+      {filteredCourses &&
+        filteredCourses.map((p) => (
           <li key={p.id} className="rounded-sm bg-white p-7">
             <div>
               <h3 className="text-lg">
@@ -26,7 +30,7 @@ export function ProgrammesList({ courses, searchError, isLoading }) {
                 <div>
                   Course:{' '}
                   <Link
-                    to={`explore/courses/${p.courseId}`}
+                    to={`explore/programmes/${p.courseId}`}
                     className="hover:underline"
                   >
                     {p.course?.name}
@@ -39,8 +43,8 @@ export function ProgrammesList({ courses, searchError, isLoading }) {
           </li>
         ))}
 
-      {searchError && <p>Not found</p>}
-      {isLoading && <p>Loading...</p>}
+      {programmes.searchError && <p>{programmes.searchError}</p>}
+      {programmes.isLoading && <p>Loading...</p>}
     </ul>
   );
 }

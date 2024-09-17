@@ -1,94 +1,104 @@
-import { createContext, useState } from 'react';
-import { Header } from '../components/Header';
+import { useState, createContext, useReducer, useMemo } from 'react';
 import { MainContent } from '../components/MainContent';
-export const HeaderContext = createContext();
+import { Hero } from '../components/Hero';
+
+export const ProgrammeContext = createContext();
+
+function programmesReducer(programmes, { type, payload }) {
+  switch (type) {
+    case 'SEARCH_START':
+      return {
+        isLoading: true,
+      };
+    case 'SEARCH_SUCCESS':
+      return {
+        isLoading: false,
+        data: payload.data,
+      };
+    case 'SEARCH_ERROR':
+      return {
+        isLoading: false,
+        searchError: payload.error,
+      };
+    default:
+      return programmes;
+  }
+}
 
 export function HomePage() {
-  const [courses, setCourses] = useState([]);
-  const [searchError, setSearchError] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
   const [universityFilter, setUniversityFilter] = useState('');
   const [subjectFilter, setSubjectFilter] = useState('');
+  const [programmes, dispatch] = useReducer(programmesReducer, {});
 
-  function searchCourses(e, q) {
+  function searchProgrammes(e, q) {
     e.preventDefault();
-    // if (q === '') return;
 
-    console.log(q);
-
-    setIsLoading(true);
-    setSearchError(false);
-    setCourses([]);
+    dispatch({ type: 'SEARCH_START' });
 
     fetch('http://localhost:8080/api/search?' + new URLSearchParams({ q }), {
       mode: 'cors',
     })
       .then((res) => {
         if (res.status >= 400) {
-          throw new Error('Not Found');
+          switch (true) {
+            case res.status === 404:
+              throw new Error('No Match');
+            case res.status >= 400 && res.status < 500:
+              throw new Error('Client Error');
+            case res.status >= 500 && res.status < 600:
+              throw new Error('Server Error');
+            default:
+              throw new Error('Something went wrong');
+          }
         }
 
         return res.json();
       })
       .then((data) => {
-        console.log(data);
-        setCourses(data);
+        dispatch({ type: 'SEARCH_SUCCESS', payload: { data } });
       })
       .catch((e) => {
-        setSearchError(true);
-        console.warn(e.message);
-      })
-      .finally(() => {
-        setIsLoading(false);
+        dispatch({ type: 'SEARCH_ERROR', payload: { error: e.message } });
       });
   }
 
-  function filterByUniversity(newValue) {
-    setUniversityFilter(newValue);
-  }
+  const filteredCourses = useMemo(() => {
+    if (!programmes.data) return;
 
-  function filterBySubject(newValue) {
-    setSubjectFilter(newValue);
-  }
-
-  const filteredCourses = courses && filterCourses();
-
-  function filterCourses() {
-    let clonedCourses = [...courses];
+    let programmesClone = [...programmes.data];
 
     if (universityFilter && universityFilter !== 'All') {
-      clonedCourses = clonedCourses.filter((c) =>
-        c.university?.name
+      programmesClone = programmesClone.filter((programme) =>
+        programme.university?.name
           .toLowerCase()
           .includes(universityFilter.toLowerCase())
       );
     }
 
     if (subjectFilter && subjectFilter !== 'All') {
-      clonedCourses = clonedCourses.filter(
-        (c) => c.subject?.name.toLowerCase() === subjectFilter.toLowerCase()
+      programmesClone = programmesClone.filter(
+        (programme) =>
+          programme.course?.subject?.name.toLowerCase() ===
+          subjectFilter.toLowerCase()
       );
     }
-    console.log(universityFilter, subjectFilter);
 
-    return clonedCourses;
-  }
-
-  console.log(courses);
+    return programmesClone;
+  }, [programmes.data, subjectFilter, universityFilter]);
 
   return (
     <>
-      <HeaderContext.Provider value={{ searchCourses }}>
-        <Header />
-      </HeaderContext.Provider>
-
-      <MainContent
-        filterByUniversity={filterByUniversity}
-        filterBySubject={filterBySubject}
-        courses={filteredCourses}
-        searchError={searchError}
-        isLoading={isLoading}
-      />
+      <Hero searchProgrammes={searchProgrammes} />
+      <ProgrammeContext.Provider
+        value={{
+          programmes,
+          filterBySubject: (filter) => setSubjectFilter(filter),
+          filterByUniversity: (filter) => setUniversityFilter(filter),
+          filteredCourses,
+        }}
+      >
+        <MainContent />
+      </ProgrammeContext.Provider>
     </>
   );
 }
