@@ -20,12 +20,9 @@ export function Home() {
     setSearchError(false);
     setCourses([]);
 
-    fetch(
-      'http://localhost:8080/api/programmes?' + new URLSearchParams({ q }),
-      {
-        mode: 'cors',
-      }
-    )
+    fetch('http://localhost:8080/api/search?' + new URLSearchParams({ q }), {
+      mode: 'cors',
+    })
       .then((res) => {
         if (res.status >= 400) {
           throw new Error('Not Found');

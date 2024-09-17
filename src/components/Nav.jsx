@@ -2,7 +2,7 @@ import { NavLink } from 'react-router-dom';
 
 export function Nav() {
   return (
-    <nav className="bg-slate-950 py-5 text-slate-100">
+    <nav className="bg-neutral-950 py-5 text-neutral-100">
       <ul className="mx-auto flex max-w-[60rem] justify-end gap-12">
         <li>
           <NavLink to="/">Home</NavLink>

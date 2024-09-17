@@ -3,7 +3,7 @@ import universities from '../data/universities.json';
 
 export function Filters({ filterByUniversity, filterBySubject }) {
   return (
-    <div className="col-span-4 self-start rounded-sm bg-slate-100 p-7">
+    <div className="col-span-4 self-start rounded-sm bg-white p-7">
       <h3 className="text-2xl font-semibold">Filters</h3>
 
       <div className="mt-5 flex flex-col gap-4">
@@ -11,7 +11,7 @@ export function Filters({ filterByUniversity, filterBySubject }) {
           University
           <select
             name="university"
-            className="mt-2 w-full appearance-none bg-white px-4 py-2"
+            className="mt-2 w-full appearance-none px-4 py-2"
             onChange={(e) => filterByUniversity(e.target.value)}
           >
             <option value="All">All Universities</option>
@@ -31,7 +31,7 @@ export function Filters({ filterByUniversity, filterBySubject }) {
           Subject
           <select
             name="subject"
-            className="mt-2 w-full appearance-none bg-white px-4 py-2"
+            className="mt-2 w-full appearance-none px-4 py-2"
             onChange={(e) => filterBySubject(e.target.value)}
           >
             <option value="All">All Subjects</option>

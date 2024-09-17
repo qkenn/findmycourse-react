@@ -5,7 +5,7 @@ export function ProgrammesList({ courses, searchError, isLoading }) {
     <ul className="col-span-8 flex flex-col gap-10">
       {courses &&
         courses.map((p) => (
-          <li key={p.id} className="rounded-sm bg-slate-100 p-7">
+          <li key={p.id} className="rounded-sm bg-white p-7">
             <div>
               <h3 className="text-lg">
                 <Link to={`explore/programmes`}>

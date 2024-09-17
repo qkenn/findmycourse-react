@@ -5,7 +5,7 @@ export function Subjects() {
   const subjects = useLoaderData();
 
   return (
-    <main className="bg-neutral-100 py-10">
+    <main className="py-10">
       <div className="mx-auto max-w-main">
         <Link to={-1} className="underline">
           ⬅ previous page
