@@ -5,15 +5,17 @@ export function Subjects() {
   const subjects = useLoaderData();
 
   return (
-    <main className="mx-auto mt-10 max-w-main">
-      <Link to={-1} className="underline">
-        go back
-      </Link>
-      <ul className="mt-5 grid grid-cols-2 gap-12">
-        {subjects.map((s) => (
-          <SubjectCard key={s.id} {...s} />
-        ))}
-      </ul>
+    <main className="bg-neutral-100 py-10">
+      <div className="mx-auto max-w-main">
+        <Link to={-1} className="underline">
+          ⬅ previous page
+        </Link>
+        <ul className="mt-5 grid grid-cols-2 gap-12">
+          {subjects.map((s) => (
+            <SubjectCard key={s.id} {...s} />
+          ))}
+        </ul>
+      </div>
     </main>
   );
 }

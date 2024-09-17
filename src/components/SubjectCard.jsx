@@ -5,7 +5,7 @@ export function SubjectCard({ name, courses }) {
   const [coursesVisibility, setCoursesVisibility] = useState(false);
 
   return (
-    <li className="self-start rounded-sm bg-slate-100 p-10">
+    <li className="self-start rounded-sm bg-white p-10">
       <div className="flex justify-between">
         <h2 className="max-w-[15rem] text-xl font-semibold">{name}</h2>
         <button onClick={() => setCoursesVisibility((current) => !current)}>

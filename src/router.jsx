@@ -6,7 +6,6 @@ import { Subjects } from './pages/Subjects';
 import { Universities } from './pages/Universities';
 import { Programmes } from './pages/Programmes';
 import { Courses } from './pages/Courses';
-import { SubjectDetailPage } from './pages/SubjectDetailPage';
 import { CourseDetailPage } from './pages/CourseDetailPage';
 import { ProgrammeDetailPage } from './pages/ProgrammeDetailPage';
 import { UniversityDetailPage } from './pages/UniversityDetailPage';
@@ -35,16 +34,16 @@ export const router = createBrowserRouter([
                   return fetch('http://localhost:8080/api/subjects', signal);
                 },
               },
-              {
-                path: ':id',
-                element: <SubjectDetailPage />,
-                loader: ({ params: { id }, request: { signal } }) => {
-                  return fetch(
-                    `http://localhost:8080/api/subjects/${id}`,
-                    signal
-                  );
-                },
-              },
+              // {
+              //   path: ':id',
+              //   element: <SubjectDetailPage />,
+              //   loader: ({ params: { id }, request: { signal } }) => {
+              //     return fetch(
+              //       `http://localhost:8080/api/subjects/${id}`,
+              //       signal
+              //     );
+              //   },
+              // },
             ],
           },
           {
