@@ -1,5 +1,5 @@
 import { useContext, useRef } from 'react';
-import { HeaderContext } from '../pages/Home';
+import { HeaderContext } from '../pages/HomePage';
 
 export function Hero() {
   const searchInputRef = useRef(null);

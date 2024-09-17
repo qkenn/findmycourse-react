@@ -3,7 +3,7 @@ import { Header } from '../components/Header';
 import { MainContent } from '../components/MainContent';
 export const HeaderContext = createContext();
 
-export function Home() {
+export function HomePage() {
   const [courses, setCourses] = useState([]);
   const [searchError, setSearchError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);

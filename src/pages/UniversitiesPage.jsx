@@ -1,7 +1,7 @@
 import { Link, useLoaderData } from 'react-router-dom';
 
-export function Programmes() {
-  const programmes = useLoaderData();
+export function UniversitiesPage() {
+  const universities = useLoaderData();
 
   return (
     <main className="mx-auto mt-10 max-w-main">
@@ -9,8 +9,8 @@ export function Programmes() {
         go back
       </Link>
       <ul>
-        {programmes.map((p) => (
-          <li key={p.id}>{p.name}</li>
+        {universities.map((u) => (
+          <li key={u.id}>{u.name}</li>
         ))}
       </ul>
     </main>

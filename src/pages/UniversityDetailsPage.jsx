@@ -1,6 +1,6 @@
 import { useLoaderData } from 'react-router-dom';
 
-export function UniversityDetailPage() {
+export function UniversityDetailsPage() {
   const course = useLoaderData();
 
   return <>{course.name}</>;

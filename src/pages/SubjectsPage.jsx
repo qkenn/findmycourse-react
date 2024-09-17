@@ -1,12 +1,12 @@
 import { Link, useLoaderData } from 'react-router-dom';
 import { SubjectCard } from '../components/SubjectCard';
 
-export function Subjects() {
+export function SubjectsPage() {
   const subjects = useLoaderData();
 
   return (
-    <main className="py-10">
-      <div className="mx-auto max-w-main">
+    <main>
+      <section className="mx-auto my-20 max-w-main">
         <Link to={-1} className="underline">
           ⬅ previous page
         </Link>
@@ -15,7 +15,7 @@ export function Subjects() {
             <SubjectCard key={s.id} {...s} />
           ))}
         </ul>
-      </div>
+      </section>
     </main>
   );
 }

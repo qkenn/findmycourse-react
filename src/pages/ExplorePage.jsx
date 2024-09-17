@@ -1,6 +1,6 @@
 import { ExploreCard } from '../components/ExploreCard';
 
-export function Explore() {
+export function ExplorePage() {
   return (
     <>
       <main className="bg-neutral-100">

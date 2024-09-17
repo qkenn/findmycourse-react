@@ -1,64 +1,51 @@
 import { createBrowserRouter } from 'react-router-dom';
-import { Home } from './pages/Home';
+import { HomePage } from './pages/HomePage';
 import { MainLayout } from './layouts/MainLayout';
-import { Explore } from './pages/Explore';
-import { Subjects } from './pages/Subjects';
-import { Universities } from './pages/Universities';
-import { Programmes } from './pages/Programmes';
-import { Courses } from './pages/Courses';
-import { CourseDetailPage } from './pages/CourseDetailPage';
-import { ProgrammeDetailPage } from './pages/ProgrammeDetailPage';
-import { UniversityDetailPage } from './pages/UniversityDetailPage';
+import { ExplorePage } from './pages/ExplorePage';
+import { SubjectsPage } from './pages/SubjectsPage';
+import { UniversitiesPage } from './pages/UniversitiesPage';
+import { ProgrammesPage } from './pages/ProgrammesPage';
+import { CoursesPage } from './pages/CoursesPage';
+import { CourseDetailsPage } from './pages/CourseDetailsPage';
+import { ProgrammeDetailsPage } from './pages/ProgrammeDetailsPage';
+import { UniversityDetailsPage } from './pages/UniversityDetailsPage';
+import { AppErrorPage } from './pages/AppErrorPage';
+import { NotFound } from './pages/NotFoundPage';
 
 export const router = createBrowserRouter([
   {
     element: <MainLayout />,
-    errorElement: <h1>Applicaton Error</h1>,
+    errorElement: <AppErrorPage />,
     children: [
       {
         path: '*',
-        element: <h1>404 | This page does not exists | Are you lost ?</h1>,
+        element: <NotFound />,
       },
-      { path: '/', element: <Home /> },
+      { path: '/', element: <HomePage /> },
       {
         path: '/explore',
         children: [
-          { index: true, element: <Explore /> },
+          { index: true, element: <ExplorePage /> },
           {
             path: 'subjects',
-            children: [
-              {
-                index: true,
-                element: <Subjects />,
-                loader: ({ request: { signal } }) => {
-                  return fetch('http://localhost:8080/api/subjects', signal);
-                },
-              },
-              // {
-              //   path: ':id',
-              //   element: <SubjectDetailPage />,
-              //   loader: ({ params: { id }, request: { signal } }) => {
-              //     return fetch(
-              //       `http://localhost:8080/api/subjects/${id}`,
-              //       signal
-              //     );
-              //   },
-              // },
-            ],
+            element: <SubjectsPage />,
+            loader: ({ request: { signal } }) => {
+              return fetch('http://localhost:8080/api/subjects', signal);
+            },
           },
           {
             path: 'courses',
             children: [
               {
                 index: true,
-                element: <Courses />,
+                element: <CoursesPage />,
                 loader: ({ request: { signal } }) => {
                   return fetch('http://localhost:8080/api/courses', signal);
                 },
               },
               {
                 path: ':id',
-                element: <CourseDetailPage />,
+                element: <CourseDetailsPage />,
                 loader: ({ params: { id }, request: { signal } }) => {
                   return fetch(
                     `http://localhost:8080/api/courses/${id}`,
@@ -73,14 +60,14 @@ export const router = createBrowserRouter([
             children: [
               {
                 index: true,
-                element: <Programmes />,
+                element: <ProgrammesPage />,
                 loader: ({ request: { signal } }) => {
                   return fetch('http://localhost:8080/api/programmes', signal);
                 },
               },
               {
                 path: ':id',
-                element: <ProgrammeDetailPage />,
+                element: <ProgrammeDetailsPage />,
                 loader: ({ params: { id }, request: { signal } }) => {
                   return fetch(
                     `http://localhost:8080/api/programmes/${id}`,
@@ -95,7 +82,7 @@ export const router = createBrowserRouter([
             children: [
               {
                 index: true,
-                element: <Universities />,
+                element: <UniversitiesPage />,
                 loader: ({ request: { signal } }) => {
                   return fetch(
                     'http://localhost:8080/api/universities',
@@ -105,7 +92,7 @@ export const router = createBrowserRouter([
               },
               {
                 path: ':id',
-                element: <UniversityDetailPage />,
+                element: <UniversityDetailsPage />,
                 loader: ({ params: { id }, request: { signal } }) => {
                   return fetch(
                     `http://localhost:8080/api/universities/${id}`,
