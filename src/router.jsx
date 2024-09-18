@@ -11,6 +11,7 @@ import { ProgrammeDetailsPage } from './pages/ProgrammeDetailsPage';
 import { UniversityDetailsPage } from './pages/UniversityDetailsPage';
 import { AppErrorPage } from './pages/AppErrorPage';
 import { NotFound } from './pages/NotFoundPage';
+import { SubjectDetailsPage } from './pages/SubjectDetailsPage';
 
 export const router = createBrowserRouter([
   {
@@ -28,10 +29,25 @@ export const router = createBrowserRouter([
           { index: true, element: <ExplorePage /> },
           {
             path: 'subjects',
-            element: <SubjectsPage />,
-            loader: ({ request: { signal } }) => {
-              return fetch('http://localhost:8080/api/subjects', signal);
-            },
+            children: [
+              {
+                index: true,
+                element: <SubjectsPage />,
+                loader: ({ request: { signal } }) => {
+                  return fetch('http://localhost:8080/api/subjects', signal);
+                },
+              },
+              {
+                path: ':id',
+                element: <SubjectDetailsPage />,
+                loader: ({ params: { id }, request: { signal } }) => {
+                  return fetch(
+                    `http://localhost:8080/api/subjects/${id}`,
+                    signal
+                  );
+                },
+              },
+            ],
           },
           {
             path: 'courses',

@@ -11,8 +11,8 @@ export function SubjectsPage() {
           ⬅ previous page
         </Link>
         <ul className="mt-5 grid grid-cols-2 gap-12">
-          {subjects.map((s) => (
-            <SubjectCard key={s.id} {...s} />
+          {subjects.map((subject) => (
+            <SubjectCard key={subject.id} {...subject} />
           ))}
         </ul>
       </section>

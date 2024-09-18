@@ -1,18 +1,21 @@
 import { Link, useLoaderData } from 'react-router-dom';
+import { UniversityCard } from '../components/UniversityCard';
 
 export function UniversitiesPage() {
   const universities = useLoaderData();
 
   return (
-    <main className="mx-auto mt-10 max-w-main">
-      <Link to=".." className="underline">
-        go back
-      </Link>
-      <ul>
-        {universities.map((u) => (
-          <li key={u.id}>{u.name}</li>
-        ))}
-      </ul>
+    <main className="mx-auto my-20 max-w-main">
+      <section>
+        <Link to={-1} className="underline">
+          ⬅ previous page
+        </Link>
+        <ul className="mt-5 grid grid-cols-2 gap-12">
+          {universities.map((university) => (
+            <UniversityCard key={university.id} {...university} />
+          ))}
+        </ul>
+      </section>
     </main>
   );
 }
