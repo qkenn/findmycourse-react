@@ -8,7 +8,7 @@ export function HomeProgrammes() {
   return (
     <ul className="col-span-8 flex flex-col gap-10">
       {filteredCourses &&
-        filteredCourses.map((p) => <HomeProgrammeCard key={p.id} p={p} />)}
+        filteredCourses.map((p) => <HomeProgrammeCard key={p.id} {...p} />)}
 
       {programmes.searchError && <p>{programmes.searchError}</p>}
       {programmes.isLoading && <p>Loading...</p>}
