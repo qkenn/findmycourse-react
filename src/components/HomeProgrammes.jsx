@@ -1,14 +1,14 @@
 import { useContext } from 'react';
 import { ProgrammeContext } from '../pages/HomePage';
-import { ProgrammeCard } from './ProgrammeCard';
+import { HomeProgrammeCard } from './HomeProgrammeCard';
 
-export function ProgrammesList() {
+export function HomeProgrammes() {
   const { programmes, filteredCourses } = useContext(ProgrammeContext);
 
   return (
     <ul className="col-span-8 flex flex-col gap-10">
       {filteredCourses &&
-        filteredCourses.map((p) => <ProgrammeCard key={p.id} p={p} />)}
+        filteredCourses.map((p) => <HomeProgrammeCard key={p.id} p={p} />)}
 
       {programmes.searchError && <p>{programmes.searchError}</p>}
       {programmes.isLoading && <p>Loading...</p>}

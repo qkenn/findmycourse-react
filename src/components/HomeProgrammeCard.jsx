@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-export function ProgrammeCard({ p }) {
+export function HomeProgrammeCard({ p }) {
   return (
     <li key={p.id} className="rounded-sm bg-white p-7">
       <div>
