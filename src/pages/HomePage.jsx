@@ -1,6 +1,7 @@
 import { useState, createContext, useReducer, useMemo } from 'react';
-import { MainContent } from '../components/MainContent';
 import { Hero } from '../components/Hero';
+import { Filters } from '../components/Filters';
+import { HomeProgrammes } from '../components/HomeProgrammes';
 
 export const ProgrammeContext = createContext();
 
@@ -97,7 +98,12 @@ export function HomePage() {
           filteredCourses,
         }}
       >
-        <MainContent />
+        <main className="my-10 px-5">
+          <div className="mx-auto grid max-w-[62.5rem] grid-cols-12 gap-10">
+            <Filters />
+            <HomeProgrammes />
+          </div>
+        </main>
       </ProgrammeContext.Provider>
     </>
   );

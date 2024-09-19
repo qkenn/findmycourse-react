@@ -1,7 +1,6 @@
 import { useNavigation } from 'react-router-dom';
 import { ExploreCard } from '../components/ExploreCard';
 import { Loading } from '../components/Loading';
-import { Breadcrumb } from '../components/BreadCrumb';
 
 export function ExplorePage() {
   const { state } = useNavigation();
