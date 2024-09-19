@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import { ProgrammeContext } from '../pages/HomePage';
 import { HomeProgrammeCard } from './HomeProgrammeCard';
+import { Loading } from './Loading';
 
 export function HomeProgrammes() {
   const { programmes, filteredCourses } = useContext(ProgrammeContext);
@@ -11,7 +12,7 @@ export function HomeProgrammes() {
         filteredCourses.map((p) => <HomeProgrammeCard key={p.id} {...p} />)}
 
       {programmes.searchError && <p>{programmes.searchError}</p>}
-      {programmes.isLoading && <p>Loading...</p>}
+      {programmes.isLoading && <Loading cardsCount={6} page="home" />}
     </ul>
   );
 }

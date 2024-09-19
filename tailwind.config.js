@@ -21,6 +21,15 @@ export default {
       maxWidth: {
         main: '60rem',
       },
+      animation: {
+        pulse: 'pulse 1s ease-in-out alternate infinite',
+      },
+      keyframes: {
+        pulse: {
+          '0%': { opacity: 0.5 },
+          '100%': { opacity: 1 },
+        },
+      },
     },
   },
   plugins: [],

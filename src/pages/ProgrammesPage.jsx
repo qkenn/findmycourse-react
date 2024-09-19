@@ -1,7 +1,9 @@
-import { Link, useLoaderData } from 'react-router-dom';
+import { Link, useLoaderData, useNavigation } from 'react-router-dom';
 import { ProgrammeCard } from '../components/ProgrammeCard';
+import { Loading } from '../components/Loading';
 
 export function ProgrammesPage() {
+  const { state } = useNavigation();
   const programmes = useLoaderData();
 
   return (
@@ -9,11 +11,16 @@ export function ProgrammesPage() {
       <Link to={-1} className="underline">
         ⬅ previous page
       </Link>
-      <ul className="mt-5 grid grid-cols-2 gap-12">
-        {programmes.map((programme) => (
-          <ProgrammeCard key={programme.id} {...programme} />
-        ))}
-      </ul>
+
+      {state === 'loading' ? (
+        <Loading page="details" />
+      ) : (
+        <ul className="mt-5 grid grid-cols-2 gap-12">
+          {programmes.map((programme) => (
+            <ProgrammeCard key={programme.id} {...programme} />
+          ))}
+        </ul>
+      )}
     </main>
   );
 }

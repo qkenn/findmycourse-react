@@ -16,6 +16,7 @@ export function ProgrammeDetailsPage() {
           <h3 className="mt-3">{programme.university.name}</h3>
 
           <div className="mt-10">
+            <div>Course - {programme.course?.name}</div>
             <div>Unicode - {programme.uniCode}</div>
             <div>Duration - {programme.duration}</div>
             <div>Medium - {programme.medium}</div>

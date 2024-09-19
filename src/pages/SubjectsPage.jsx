@@ -1,7 +1,9 @@
-import { Link, useLoaderData } from 'react-router-dom';
+import { Link, useLoaderData, useNavigation } from 'react-router-dom';
 import { SubjectCard } from '../components/SubjectCard';
+import { Loading } from '../components/Loading';
 
 export function SubjectsPage() {
+  const { state } = useNavigation();
   const subjects = useLoaderData();
 
   return (
@@ -10,11 +12,16 @@ export function SubjectsPage() {
         <Link to={-1} className="underline">
           ⬅ previous page
         </Link>
-        <ul className="mt-5 grid grid-cols-2 gap-12">
-          {subjects.map((subject) => (
-            <SubjectCard key={subject.id} {...subject} />
-          ))}
-        </ul>
+
+        {state === 'loading' ? (
+          <Loading page="details" />
+        ) : (
+          <ul className="mt-5 grid grid-cols-2 gap-12">
+            {subjects.map((subject) => (
+              <SubjectCard key={subject.id} {...subject} />
+            ))}
+          </ul>
+        )}
       </section>
     </main>
   );
