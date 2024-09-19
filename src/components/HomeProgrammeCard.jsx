@@ -3,19 +3,17 @@ import { Link } from 'react-router-dom';
 export function HomeProgrammeCard({
   name,
   id,
-  universityId,
-  courseId,
+  university,
+  course,
   duration,
   medium,
-  course,
-  university,
 }) {
   return (
     <Link to={`explore/programmes/${id}`} className="rounded-sm bg-white p-7">
       <div>
         <h3 className="text-lg font-semibold">{name}</h3>
         <Link
-          to={`explore/universities/${universityId}`}
+          to={`explore/universities/${university.id}`}
           className="hover:underline"
         >
           {university?.name}
@@ -25,7 +23,7 @@ export function HomeProgrammeCard({
           <div>
             Course:{' '}
             <Link
-              to={`explore/courses/${courseId}`}
+              to={`explore/courses/${course.id}`}
               className="hover:underline"
             >
               {course?.name}

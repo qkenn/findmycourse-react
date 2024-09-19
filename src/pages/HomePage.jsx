@@ -13,8 +13,12 @@ function programmesReducer(programmes, { type, payload }) {
       };
     case 'SEARCH_SUCCESS':
       return {
+        query: payload.q,
         isLoading: false,
-        data: payload.data,
+        results: payload.data.programmes,
+        count: payload.data.count,
+        pageSize: payload.data.pageSize,
+        page: payload.data.page,
       };
     case 'SEARCH_ERROR':
       return {
@@ -31,14 +35,21 @@ export function HomePage() {
   const [subjectFilter, setSubjectFilter] = useState('');
   const [programmes, dispatch] = useReducer(programmesReducer, {});
 
-  function searchProgrammes(e, q) {
+  function handleSearch(e, q) {
     e.preventDefault();
 
+    searchDB(q);
+  }
+
+  function searchDB(q, page = 1) {
     dispatch({ type: 'SEARCH_START' });
 
-    fetch('http://localhost:8080/api/search?' + new URLSearchParams({ q }), {
-      mode: 'cors',
-    })
+    fetch(
+      'http://localhost:8080/api/search?' + new URLSearchParams({ q, page }),
+      {
+        mode: 'cors',
+      }
+    )
       .then((res) => {
         if (res.status >= 400) {
           switch (true) {
@@ -56,17 +67,17 @@ export function HomePage() {
         return res.json();
       })
       .then((data) => {
-        dispatch({ type: 'SEARCH_SUCCESS', payload: { data } });
+        dispatch({ type: 'SEARCH_SUCCESS', payload: { data, q } });
       })
       .catch((e) => {
-        dispatch({ type: 'SEARCH_ERROR', payload: { error: e.message } });
+        dispatch({ type: 'SEARCH_ERROR', payload: { error: e.message, q } });
       });
   }
 
   const filteredCourses = useMemo(() => {
-    if (!programmes.data) return;
+    if (!programmes.results) return;
 
-    let programmesClone = [...programmes.data];
+    let programmesClone = [...programmes.results];
 
     if (universityFilter && universityFilter !== 'All') {
       programmesClone = programmesClone.filter((programme) =>
@@ -85,17 +96,18 @@ export function HomePage() {
     }
 
     return programmesClone;
-  }, [programmes.data, subjectFilter, universityFilter]);
+  }, [programmes.results, subjectFilter, universityFilter]);
 
   return (
     <>
-      <Hero searchProgrammes={searchProgrammes} />
+      <Hero handleSearch={handleSearch} />
       <ProgrammeContext.Provider
         value={{
           programmes,
           filterBySubject: (filter) => setSubjectFilter(filter),
           filterByUniversity: (filter) => setUniversityFilter(filter),
           filteredCourses,
+          searchDB,
         }}
       >
         <main className="my-10 px-5">

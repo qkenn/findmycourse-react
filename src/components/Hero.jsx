@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 
-export function Hero({ searchProgrammes }) {
+export function Hero({ handleSearch }) {
   const searchInputRef = useRef(null);
 
   return (
@@ -11,7 +11,7 @@ export function Hero({ searchProgrammes }) {
         </h1>
         <form
           className="mx-auto mt-10 flex items-center"
-          onSubmit={(e) => searchProgrammes(e, searchInputRef.current.value)}
+          onSubmit={(e) => handleSearch(e, searchInputRef.current.value)}
           autoComplete="off"
         >
           <label className="w-[30rem]">

@@ -27,7 +27,7 @@ export function Loading({ cardsCount, page }) {
 
   if (page === 'details') {
     return (
-      <div className="mt-5 h-[70vh] animate-pulse rounded-sm bg-white"></div>
+      <div className="mt-5 h-[72vh] animate-pulse rounded-sm bg-white"></div>
     );
   }
 }
