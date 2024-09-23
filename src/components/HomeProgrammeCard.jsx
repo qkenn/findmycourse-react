@@ -9,7 +9,7 @@ export function HomeProgrammeCard({
   medium,
 }) {
   return (
-    <Link to={`explore/programmes/${id}`} className="rounded-sm bg-white p-7">
+    <li className="rounded-sm bg-white p-7">
       <div>
         <h3 className="text-lg font-semibold">{name}</h3>
         <Link
@@ -19,20 +19,29 @@ export function HomeProgrammeCard({
           {university?.name}
         </Link>
 
-        <div className="mt-5">
+        <div className="mt-5 flex justify-between">
           <div>
-            Course:{' '}
-            <Link
-              to={`explore/courses/${course.id}`}
-              className="hover:underline"
-            >
-              {course?.name}
-            </Link>
+            <div>
+              Course:{' '}
+              <Link
+                to={`explore/courses/${course.id}`}
+                className="hover:underline"
+              >
+                {course?.name}
+              </Link>
+            </div>
+            <div>Duration: {duration}</div>
+            <div>Medium: {medium}</div>
           </div>
-          <div>Duration: {duration}</div>
-          <div>Medium: {medium}</div>
+
+          <Link
+            className="self-end rounded-sm bg-neutral-900 px-5 py-2 text-white"
+            to={`explore/programmes/${id}`}
+          >
+            More Details
+          </Link>
         </div>
       </div>
-    </Link>
+    </li>
   );
 }

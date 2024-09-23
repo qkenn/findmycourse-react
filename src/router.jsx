@@ -120,7 +120,6 @@ export const router = createBrowserRouter([
           },
         ],
       },
-      { path: '/check-eligibility', element: <h1>Check Eligibiliity page</h1> },
     ],
   },
 ]);

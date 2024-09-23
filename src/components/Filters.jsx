@@ -11,24 +11,21 @@ export function Filters() {
     <section className="col-span-4 self-start rounded-sm bg-white p-7">
       <h3 className="text-2xl font-semibold">Filters</h3>
 
-      <form
-        className="mt-5 flex flex-col gap-4"
-        onSubmit={(e) => e.preventDefault()}
-      >
+      <div className="mt-5 flex flex-col gap-4">
         <Filter
           type="University"
-          defaultOption="All Universities"
+          defaultOption="select university"
           filterHandler={filterByUniversity}
           options={universities}
         />
 
-        <Filter
+        {/* <Filter
           type="Subject"
           defaultOption="All Subjects"
           filterHandler={filterBySubject}
           options={subjects}
-        />
-      </form>
+        /> */}
+      </div>
     </section>
   );
 }

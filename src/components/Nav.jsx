@@ -11,9 +11,6 @@ export function Nav() {
           <li>
             <NavLink to="/explore">Explore</NavLink>
           </li>
-          <li>
-            <NavLink to="/check-eligibility">Check Eligibility</NavLink>
-          </li>
         </ul>
       </nav>
     </header>

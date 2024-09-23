@@ -1,10 +1,11 @@
-import { useState, createContext, useReducer, useMemo } from 'react';
+import { useState, createContext, useReducer } from 'react';
 import { Hero } from '../components/Hero';
 import { Filters } from '../components/Filters';
 import { HomeProgrammes } from '../components/HomeProgrammes';
 
 export const ProgrammeContext = createContext();
 
+//
 function programmesReducer(programmes, { type, payload }) {
   switch (type) {
     case 'SEARCH_START':
@@ -12,6 +13,8 @@ function programmesReducer(programmes, { type, payload }) {
         isLoading: true,
       };
     case 'SEARCH_SUCCESS':
+      console.log(payload.data);
+
       return {
         query: payload.q,
         isLoading: false,
@@ -24,6 +27,7 @@ function programmesReducer(programmes, { type, payload }) {
       return {
         isLoading: false,
         searchError: payload.error,
+        query: payload.q,
       };
     default:
       return programmes;
@@ -31,9 +35,23 @@ function programmesReducer(programmes, { type, payload }) {
 }
 
 export function HomePage() {
-  const [universityFilter, setUniversityFilter] = useState('');
-  const [subjectFilter, setSubjectFilter] = useState('');
   const [programmes, dispatch] = useReducer(programmesReducer, {});
+  const [subjectFilter, setSubjectFilter] = useState([]);
+  const [universityFilter, setUniversityFilter] = useState([]);
+
+  console.log(universityFilter);
+
+  function filter(type, id) {
+    const updatedUniversityIds = universityFilter.includes(id)
+      ? universityFilter.filter((f) => f !== id)
+      : [...universityFilter, id];
+
+    if (type === 'university') {
+      setUniversityFilter(updatedUniversityIds);
+
+      searchDB(programmes.query, 1, updatedUniversityIds);
+    }
+  }
 
   function handleSearch(e, q) {
     e.preventDefault();
@@ -41,11 +59,12 @@ export function HomePage() {
     searchDB(q);
   }
 
-  function searchDB(q, page = 1) {
+  function searchDB(q, page = 1, university = []) {
     dispatch({ type: 'SEARCH_START' });
 
     fetch(
-      'http://localhost:8080/api/search?' + new URLSearchParams({ q, page }),
+      'http://localhost:8080/api/search?' +
+        new URLSearchParams({ q, page, university }),
       {
         mode: 'cors',
       }
@@ -74,40 +93,16 @@ export function HomePage() {
       });
   }
 
-  const filteredCourses = useMemo(() => {
-    if (!programmes.results) return;
-
-    let programmesClone = [...programmes.results];
-
-    if (universityFilter && universityFilter !== 'All') {
-      programmesClone = programmesClone.filter((programme) =>
-        programme.university?.name
-          .toLowerCase()
-          .includes(universityFilter.toLowerCase())
-      );
-    }
-
-    if (subjectFilter && subjectFilter !== 'All') {
-      programmesClone = programmesClone.filter(
-        (programme) =>
-          programme.course?.subject?.name.toLowerCase() ===
-          subjectFilter.toLowerCase()
-      );
-    }
-
-    return programmesClone;
-  }, [programmes.results, subjectFilter, universityFilter]);
-
   return (
     <>
       <Hero handleSearch={handleSearch} />
       <ProgrammeContext.Provider
         value={{
           programmes,
-          filterBySubject: (filter) => setSubjectFilter(filter),
-          filterByUniversity: (filter) => setUniversityFilter(filter),
-          filteredCourses,
           searchDB,
+          filter,
+          universityFilter,
+          resetFilters: () => setUniversityFilter([]),
         }}
       >
         <main className="my-10 px-5">
