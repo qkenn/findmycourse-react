@@ -8,7 +8,7 @@ export function HomeProgrammes() {
   const pagesCount =
     (programmes.count || 0) <= (programmes.pageSize || 8)
       ? 1
-      : Math.ceil(programmes.count || 0 / programmes.pageSize || 8);
+      : Math.ceil((programmes.count || 0) / (programmes.pageSize || 8));
 
   console.log(programmes.pageSize, programmes.count, pagesCount);
 

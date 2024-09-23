@@ -41,16 +41,24 @@ export function HomePage() {
 
   console.log(universityFilter);
 
-  function filter(type, id) {
+  function filterWithUniversities(id) {
     const updatedUniversityIds = universityFilter.includes(id)
       ? universityFilter.filter((f) => f !== id)
       : [...universityFilter, id];
 
-    if (type === 'university') {
-      setUniversityFilter(updatedUniversityIds);
+    setUniversityFilter(updatedUniversityIds);
 
-      searchDB(programmes.query, 1, updatedUniversityIds);
-    }
+    searchDB(programmes.query, 1, updatedUniversityIds, subjectFilter);
+  }
+
+  function filterWithSubjects(id) {
+    const updatedSubjectIds = subjectFilter.includes(id)
+      ? subjectFilter.filter((f) => f !== id)
+      : [...subjectFilter, id];
+
+    setSubjectFilter(updatedSubjectIds);
+
+    searchDB(programmes.query, 1, universityFilter, updatedSubjectIds);
   }
 
   function handleSearch(e, q) {
@@ -59,12 +67,12 @@ export function HomePage() {
     searchDB(q);
   }
 
-  function searchDB(q, page = 1, university = []) {
+  function searchDB(q, page = 1, university = [], subject = []) {
     dispatch({ type: 'SEARCH_START' });
 
     fetch(
       'http://localhost:8080/api/search?' +
-        new URLSearchParams({ q, page, university }),
+        new URLSearchParams({ q, page, university, subject }),
       {
         mode: 'cors',
       }
@@ -100,9 +108,11 @@ export function HomePage() {
         value={{
           programmes,
           searchDB,
-          filter,
+          filterWithUniversities,
+          subjectFilter,
           universityFilter,
           resetFilters: () => setUniversityFilter([]),
+          filterWithSubjects,
         }}
       >
         <main className="my-10 px-5">

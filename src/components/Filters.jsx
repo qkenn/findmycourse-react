@@ -13,18 +13,18 @@ export function Filters() {
 
       <div className="mt-5 flex flex-col gap-4">
         <Filter
-          type="University"
-          defaultOption="select university"
+          type="university"
+          defaultOption="Select university"
           filterHandler={filterByUniversity}
           options={universities}
         />
 
-        {/* <Filter
-          type="Subject"
-          defaultOption="All Subjects"
+        <Filter
+          type="subject"
+          defaultOption="Select subject"
           filterHandler={filterBySubject}
           options={subjects}
-        /> */}
+        />
       </div>
     </section>
   );
