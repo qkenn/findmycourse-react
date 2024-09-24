@@ -1,7 +1,7 @@
 import { useContext, useRef } from 'react';
 import { ProgrammeContext } from '../pages/HomePage';
 
-export function Hero() {
+export function Hero({ initialize }) {
   const searchInputRef = useRef(null);
   const { searchProgrammes, programmesDispatch } = useContext(ProgrammeContext);
 
@@ -16,6 +16,7 @@ export function Hero() {
           onSubmit={(e) => {
             e.preventDefault();
             searchProgrammes(programmesDispatch, searchInputRef.current.value);
+            initialize();
           }}
           autoComplete="off"
         >

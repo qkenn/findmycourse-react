@@ -1,4 +1,4 @@
-import { createContext, useEffect, useReducer } from 'react';
+import { createContext, useEffect, useReducer, useState } from 'react';
 import { Hero } from '../components/Hero';
 import { programmesReducer } from '../reducers/programmesReducer';
 import { FiltersReducer } from '../reducers/filtersReducer';
@@ -13,6 +13,7 @@ export function HomePage() {
     universityIds: [],
     subjectIds: [],
   });
+  const [initialized, setInitialized] = useState(false);
 
   useEffect(() => {
     document.title = 'Home';
@@ -29,9 +30,15 @@ export function HomePage() {
           filters,
         }}
       >
-        <Hero />
+        <Hero
+          initialize={() => {
+            if (!initialized) {
+              setInitialized(true);
+            }
+          }}
+        />
 
-        {programmes.results && <ProgrammesGrid />}
+        {initialized && <ProgrammesGrid />}
       </ProgrammeContext.Provider>
     </>
   );

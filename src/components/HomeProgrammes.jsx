@@ -15,34 +15,35 @@ export function HomeProgrammes() {
 
   return (
     <ul className="col-span-8 flex flex-col gap-10">
-      {programmes.results.map((p) => (
-        <HomeProgrammeCard key={p.id} {...p} />
-      ))}
+      {programmes.results &&
+        programmes.results.map((p) => <HomeProgrammeCard key={p.id} {...p} />)}
 
       {programmes.searchError && <p>{programmes.searchError}</p>}
 
       {programmes.isLoading && <Loading cardsCount={6} page="home" />}
 
-      <div className="flex justify-center gap-3">
-        {[...Array(pagesCount)].map((_, index) => (
-          // pagination links
-          <button
-            disabled={index + 1 === programmes.page}
-            className={`${index + 1 === programmes.page ? 'rounded-sm bg-neutral-950 px-2 py-0.5 text-white' : 'hover:underline'}`}
-            key={index}
-            onClick={() => {
-              const pageNumber = index + 1;
-              searchProgrammes(
-                programmesDispatch,
-                programmes.query,
-                pageNumber
-              );
-            }}
-          >
-            {index + 1}
-          </button>
-        ))}
-      </div>
+      {programmes.count && programmes.results && (
+        <div className="flex justify-center gap-3">
+          {[...Array(pagesCount)].map((_, index) => (
+            // pagination links
+            <button
+              disabled={index + 1 === programmes.page}
+              className={`${index + 1 === programmes.page ? 'rounded-sm bg-neutral-950 px-2 py-0.5 text-white' : 'hover:underline'}`}
+              key={index}
+              onClick={() => {
+                const pageNumber = index + 1;
+                searchProgrammes(
+                  programmesDispatch,
+                  programmes.query,
+                  pageNumber
+                );
+              }}
+            >
+              {index + 1}
+            </button>
+          ))}
+        </div>
+      )}
     </ul>
   );
 }

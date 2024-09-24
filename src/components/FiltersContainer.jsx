@@ -20,7 +20,7 @@ export function FiltersContainer() {
         filtersDispatch({ type: 'UNI_FILTER', payload: { id: id } }),
 
       reset: () => filtersDispatch({ type: 'UNI_RESET' }),
-      research: (id) =>
+      research: (id) => {
         searchProgrammes(
           programmesDispatch,
           programmes.query,
@@ -29,7 +29,8 @@ export function FiltersContainer() {
             ? filters.universityIds.filter((f) => f !== id)
             : [...filters.universityIds, id],
           filters.subjectIds
-        ),
+        );
+      },
     },
 
     subject: {
@@ -38,7 +39,7 @@ export function FiltersContainer() {
         filtersDispatch({ type: 'SUBJECT_FILTER', payload: { id: id } }),
 
       reset: () => filtersDispatch({ type: 'SUBJECT_RESET' }),
-      research: (id) =>
+      research: (id) => {
         searchProgrammes(
           programmesDispatch,
           programmes.query,
@@ -47,7 +48,8 @@ export function FiltersContainer() {
           filters.subjectIds.includes(id)
             ? filters.subjectIds.filter((f) => f !== id)
             : [...filters.subjectIds, id]
-        ),
+        );
+      },
     },
   };
 
