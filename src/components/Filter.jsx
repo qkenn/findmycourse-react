@@ -6,9 +6,10 @@ export function Filter({ type, defaultOption, options }) {
   const {
     filterWithUniversities,
     universityFilter,
-    searchDB,
+    searchProgrammes,
     programmes,
-    resetFilters,
+    resetUniFilter,
+    resetSubjectFilter,
     filterWithSubjects,
     subjectFilter,
   } = useContext(ProgrammeContext);
@@ -22,6 +23,7 @@ export function Filter({ type, defaultOption, options }) {
         defaultFilterText: 'All Universities',
         selected: (id) => universityFilter.includes(id),
         filter: (id) => filterWithUniversities(id),
+        reset: resetUniFilter,
       };
       break;
     case 'subject':
@@ -30,12 +32,13 @@ export function Filter({ type, defaultOption, options }) {
         defaultFilterText: 'All Subjects',
         selected: (id) => subjectFilter.includes(id),
         filter: (id) => filterWithSubjects(id),
+        reset: resetSubjectFilter,
       };
   }
 
   return (
     <div className="relative">
-      <h4 className="text-sm">{defaultOption}</h4>
+      <h4 className="text-sm">{filter.title}</h4>
       <button
         className="mt-2 block w-full border-[1px] border-neutral-700 px-3 py-1 text-start"
         onClick={() => setShowFilter(true)}
@@ -54,8 +57,8 @@ export function Filter({ type, defaultOption, options }) {
                 <li
                   onClick={() => {
                     setIsResetSelected((s) => !s);
-                    resetFilters();
-                    searchDB(programmes.query);
+                    filter.reset();
+                    searchProgrammes(programmes.query);
                   }}
                   className={`cursor-pointer p-2 ${isResetSelected ? 'bg-neutral-100' : null}`}
                 >

@@ -48,7 +48,7 @@ export function HomePage() {
 
     setUniversityFilter(updatedUniversityIds);
 
-    searchDB(programmes.query, 1, updatedUniversityIds, subjectFilter);
+    searchProgrammes(programmes.query, 1, updatedUniversityIds, subjectFilter);
   }
 
   function filterWithSubjects(id) {
@@ -58,25 +58,24 @@ export function HomePage() {
 
     setSubjectFilter(updatedSubjectIds);
 
-    searchDB(programmes.query, 1, universityFilter, updatedSubjectIds);
+    searchProgrammes(programmes.query, 1, universityFilter, updatedSubjectIds);
   }
 
-  function handleSearch(e, q) {
-    e.preventDefault();
-
-    searchDB(q);
-  }
-
-  function searchDB(q, page = 1, university = [], subject = []) {
+  function searchProgrammes(q, page = 1, university = [], subject = []) {
     dispatch({ type: 'SEARCH_START' });
 
-    fetch(
-      'http://localhost:8080/api/search?' +
-        new URLSearchParams({ q, page, university, subject }),
-      {
-        mode: 'cors',
-      }
-    )
+    // getting params
+    const params = new URLSearchParams({ q, page });
+    if (university.length > 0) {
+      params.append('university', university.join(','));
+    }
+    if (subject.length > 0) {
+      params.append('subject', subject.join(','));
+    }
+
+    fetch('http://localhost:8080/api/search?' + params.toString(), {
+      mode: 'cors',
+    })
       .then((res) => {
         if (res.status >= 400) {
           switch (true) {
@@ -103,15 +102,20 @@ export function HomePage() {
 
   return (
     <>
-      <Hero handleSearch={handleSearch} />
+      <Hero searchProgrammes={searchProgrammes} />
       <ProgrammeContext.Provider
         value={{
           programmes,
-          searchDB,
+          searchProgrammes,
           filterWithUniversities,
           subjectFilter,
           universityFilter,
-          resetFilters: () => setUniversityFilter([]),
+          resetUniFilter: () => {
+            setUniversityFilter([]);
+          },
+          resetSubjectFilter: () => {
+            setSubjectFilter([]);
+          },
           filterWithSubjects,
         }}
       >
