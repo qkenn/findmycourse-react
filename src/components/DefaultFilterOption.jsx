@@ -1,25 +1,25 @@
 import { useContext } from 'react';
 import { ProgrammeContext } from '../pages/HomePage';
 import Checkbox from './Checkbox';
+import { FilterContext } from './Filter';
 
 export default function DefaultFilterOption({
-  handleReset,
-  resetSelected,
-  resetFilter,
-  title,
+  handleDefaultOption,
+  defaultOptionSelected,
 }) {
   const { searchProgrammes, programmes } = useContext(ProgrammeContext);
+  const { title, filter } = useContext(FilterContext);
 
   return (
     <li
       onClick={() => {
-        handleReset();
-        resetFilter();
+        handleDefaultOption();
+        filter.reset();
         searchProgrammes(programmes.query);
       }}
-      className={`flex cursor-pointer gap-3 p-2 ${resetSelected && 'bg-neutral-100'}`}
+      className={`flex cursor-pointer gap-3 p-2 ${defaultOptionSelected && 'bg-neutral-100'}`}
     >
-      {resetSelected ? (
+      {defaultOptionSelected ? (
         <Checkbox checked={true} />
       ) : (
         <Checkbox checked={false} />

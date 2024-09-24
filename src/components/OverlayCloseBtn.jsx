@@ -1,4 +1,9 @@
-export default function OverlayCloseBtn({ closeOverlay }) {
+import { useContext } from 'react';
+import { FilterContext } from './Filter';
+
+export default function OverlayCloseBtn() {
+  const { closeOverlay } = useContext(FilterContext);
+
   return (
     <button
       onClick={closeOverlay}
