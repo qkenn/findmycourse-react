@@ -1,5 +1,6 @@
 import { useContext, useState } from 'react';
 import { ProgrammeContext } from '../pages/HomePage';
+import Checkbox from './Checkbox';
 
 export function Filter({ type, defaultOption, options }) {
   const [showFilter, setShowFilter] = useState(false);
@@ -60,21 +61,32 @@ export function Filter({ type, defaultOption, options }) {
                     filter.reset();
                     searchProgrammes(programmes.query);
                   }}
-                  className={`cursor-pointer p-2 ${isResetSelected ? 'bg-neutral-100' : null}`}
+                  className={`flex cursor-pointer gap-3 p-2 ${isResetSelected ? 'bg-neutral-100' : null}`}
                 >
-                  {type === 'university' ? 'All Universities' : 'All Subjects'}
+                  {isResetSelected ? (
+                    <Checkbox checked={true} />
+                  ) : (
+                    <Checkbox checked={false} />
+                  )}
+
+                  <span>{filter.defaultFilterText}</span>
                 </li>
                 {options.map((e) => (
                   <li
                     key={e.id}
                     value={e.name}
-                    className={`cursor-pointer p-2 ${filter.selected(e.id) && 'bg-neutral-100'}`}
+                    className={`flex cursor-pointer items-center gap-3 p-2 ${filter.selected(e.id) && 'bg-neutral-100'}`}
                     onClick={() => {
                       setIsResetSelected(false);
                       filter.filter(e.id);
                     }}
                   >
-                    {e.name}
+                    {filter.selected(e.id) ? (
+                      <Checkbox checked={true} />
+                    ) : (
+                      <Checkbox checked={false} />
+                    )}
+                    <span>{e.name}</span>
                   </li>
                 ))}
               </ul>

@@ -5,7 +5,6 @@ import { HomeProgrammes } from '../components/HomeProgrammes';
 
 export const ProgrammeContext = createContext();
 
-//
 function programmesReducer(programmes, { type, payload }) {
   switch (type) {
     case 'SEARCH_START':
