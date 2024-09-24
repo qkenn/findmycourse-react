@@ -1,6 +1,6 @@
-import { useState, useContext } from 'react';
+import { useState } from 'react';
 import Checkbox from './Checkbox';
-import { ProgrammeContext } from '../pages/HomePage';
+import DefaultFilterOption from './DefaultFilterOption';
 
 export default function FilterOverlay({
   options,
@@ -9,7 +9,6 @@ export default function FilterOverlay({
   filter,
 }) {
   const [resetSelected, setResetSelected] = useState(false);
-  const { searchProgrammes, programmes } = useContext(ProgrammeContext);
 
   return (
     <div className="fixed inset-0 z-10 flex items-center justify-center bg-neutral-700 bg-opacity-50 p-10">
@@ -26,22 +25,12 @@ export default function FilterOverlay({
           </button>
         </div>
         <ul className="mt-5 flex flex-col divide-y">
-          <li
-            onClick={() => {
-              setResetSelected((s) => !s);
-              filter.reset();
-              searchProgrammes(programmes.query);
-            }}
-            className={`flex cursor-pointer gap-3 p-2 ${resetSelected && 'bg-neutral-100'}`}
-          >
-            {resetSelected ? (
-              <Checkbox checked={true} />
-            ) : (
-              <Checkbox checked={false} />
-            )}
-
-            <span>{`All ${title}s`}</span>
-          </li>
+          <DefaultFilterOption
+            handleReset={() => setResetSelected((r) => !r)}
+            resetSelected={resetSelected}
+            resetFilter={filter.reset}
+            title={title}
+          />
           {options.map((e) => (
             <li
               key={e.id}
