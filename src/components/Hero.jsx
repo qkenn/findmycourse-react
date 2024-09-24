@@ -27,7 +27,7 @@ export function Hero() {
                 type="text"
                 name="q"
                 placeholder="Keywords e.g subject/programme name/location"
-                className="mt-1 w-full rounded-sm border-[1px] border-neutral-600 px-5 py-2 pl-12 placeholder:text-neutral-400"
+                className="mt-1 w-full rounded-sm border-[1px] border-neutral-600/50 px-5 py-2 pl-12 placeholder:text-neutral-400"
                 ref={searchInputRef}
               />
               <img

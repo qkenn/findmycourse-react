@@ -4,7 +4,7 @@ import universities from '../data/universities.json';
 import { Filter } from './Filter';
 import { ProgrammeContext } from '../pages/HomePage';
 
-export function Filters() {
+export function FiltersContainer() {
   const {
     filters,
     filtersDispatch,
