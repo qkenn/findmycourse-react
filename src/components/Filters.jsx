@@ -1,11 +1,48 @@
 import { useContext } from 'react';
 import subjects from '../data/subjects.json';
 import universities from '../data/universities.json';
-import { ProgrammeContext } from '../pages/HomePage';
 import { Filter } from './Filter';
+import { ProgrammeContext } from '../pages/HomePage';
 
 export function Filters() {
-  const { filterBySubject, filterByUniversity } = useContext(ProgrammeContext);
+  const { filters, filtersDispatch, searchProgrammes, programmes } =
+    useContext(ProgrammeContext);
+
+  const filterProps = {
+    university: {
+      selected: (id) => filters.universityIds.includes(id),
+      dispatch: (id) =>
+        filtersDispatch({ type: 'UNI_FILTER', payload: { id: id } }),
+
+      reset: () => filtersDispatch({ type: 'UNI_RESET' }),
+      research: (id) =>
+        searchProgrammes(
+          programmes.query,
+          1,
+          filters.universityIds.includes(id)
+            ? filters.universityIds.filter((f) => f !== id)
+            : [...filters.universityIds, id],
+          filters.subjectIds
+        ),
+    },
+
+    subject: {
+      selected: (id) => filters.subjectIds.includes(id),
+      dispatch: (id) =>
+        filtersDispatch({ type: 'SUBJECT_FILTER', payload: { id: id } }),
+
+      reset: () => filtersDispatch({ type: 'SUBJECT_RESET' }),
+      research: (id) =>
+        searchProgrammes(
+          programmes.query,
+          1,
+          filters.universityIds,
+          filters.subjectIds.includes(id)
+            ? filters.subjectIds.filter((f) => f !== id)
+            : [...filters.subjectIds, id]
+        ),
+    },
+  };
 
   return (
     <section className="col-span-4 self-start rounded-sm bg-white p-7">
@@ -13,17 +50,15 @@ export function Filters() {
 
       <div className="mt-5 flex flex-col gap-4">
         <Filter
-          type="university"
-          defaultOption="Select university"
-          filterHandler={filterByUniversity}
+          title="University"
           options={universities}
+          filter={filterProps.university}
         />
 
         <Filter
-          type="subject"
-          defaultOption="Select subject"
-          filterHandler={filterBySubject}
+          title="Subject"
           options={subjects}
+          filter={filterProps.subject}
         />
       </div>
     </section>

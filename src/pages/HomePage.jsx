@@ -1,4 +1,4 @@
-import { useState, createContext, useReducer } from 'react';
+import { createContext, useReducer } from 'react';
 import { Hero } from '../components/Hero';
 import { Filters } from '../components/Filters';
 import { HomeProgrammes } from '../components/HomeProgrammes';
@@ -33,35 +33,47 @@ function programmesReducer(programmes, { type, payload }) {
   }
 }
 
+function FiltersReducer(state, { type, payload }) {
+  switch (type) {
+    case 'SUBJECT_FILTER':
+      return {
+        ...state,
+        subjectIds: state.subjectIds.includes(payload.id)
+          ? state.subjectIds.filter((f) => f !== payload.id)
+          : [...state.subjectIds, payload.id],
+      };
+
+    case 'UNI_FILTER':
+      return {
+        ...state,
+        universityIds: state.universityIds.includes(payload.id)
+          ? state.universityIds.filter((f) => f !== payload.id)
+          : [...state.universityIds, payload.id],
+      };
+    case 'SUBJECT_RESET':
+      return {
+        ...state,
+        subjectIds: [],
+      };
+    case 'UNI_RESET':
+      return {
+        ...state,
+        universityIds: [],
+      };
+    default:
+      return state;
+  }
+}
+
 export function HomePage() {
-  const [programmes, dispatch] = useReducer(programmesReducer, {});
-  const [subjectFilter, setSubjectFilter] = useState([]);
-  const [universityFilter, setUniversityFilter] = useState([]);
-
-  console.log(universityFilter);
-
-  function filterWithUniversities(id) {
-    const updatedUniversityIds = universityFilter.includes(id)
-      ? universityFilter.filter((f) => f !== id)
-      : [...universityFilter, id];
-
-    setUniversityFilter(updatedUniversityIds);
-
-    searchProgrammes(programmes.query, 1, updatedUniversityIds, subjectFilter);
-  }
-
-  function filterWithSubjects(id) {
-    const updatedSubjectIds = subjectFilter.includes(id)
-      ? subjectFilter.filter((f) => f !== id)
-      : [...subjectFilter, id];
-
-    setSubjectFilter(updatedSubjectIds);
-
-    searchProgrammes(programmes.query, 1, universityFilter, updatedSubjectIds);
-  }
+  const [programmes, programmesDispatch] = useReducer(programmesReducer, {});
+  const [filters, filtersDispatch] = useReducer(FiltersReducer, {
+    universityIds: [],
+    subjectIds: [],
+  });
 
   function searchProgrammes(q, page = 1, university = [], subject = []) {
-    dispatch({ type: 'SEARCH_START' });
+    programmesDispatch({ type: 'SEARCH_START' });
 
     // getting params
     const params = new URLSearchParams({ q, page });
@@ -92,10 +104,13 @@ export function HomePage() {
         return res.json();
       })
       .then((data) => {
-        dispatch({ type: 'SEARCH_SUCCESS', payload: { data, q } });
+        programmesDispatch({ type: 'SEARCH_SUCCESS', payload: { data, q } });
       })
       .catch((e) => {
-        dispatch({ type: 'SEARCH_ERROR', payload: { error: e.message, q } });
+        programmesDispatch({
+          type: 'SEARCH_ERROR',
+          payload: { error: e.message, q },
+        });
       });
   }
 
@@ -106,16 +121,8 @@ export function HomePage() {
         value={{
           programmes,
           searchProgrammes,
-          filterWithUniversities,
-          subjectFilter,
-          universityFilter,
-          resetUniFilter: () => {
-            setUniversityFilter([]);
-          },
-          resetSubjectFilter: () => {
-            setSubjectFilter([]);
-          },
-          filterWithSubjects,
+          filtersDispatch,
+          filters,
         }}
       >
         <main className="my-10 px-5">
