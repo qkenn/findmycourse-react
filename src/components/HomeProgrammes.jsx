@@ -4,7 +4,8 @@ import { HomeProgrammeCard } from './HomeProgrammeCard';
 import { Loading } from './Loading';
 
 export function HomeProgrammes() {
-  const { programmes, searchProgrammes } = useContext(ProgrammeContext);
+  const { programmes, searchProgrammes, programmesDispatch } =
+    useContext(ProgrammeContext);
   const pagesCount =
     (programmes.count || 0) <= (programmes.pageSize || 8)
       ? 1
@@ -31,7 +32,11 @@ export function HomeProgrammes() {
               key={index}
               onClick={() => {
                 const pageNumber = index + 1;
-                searchProgrammes(programmes.query, pageNumber);
+                searchProgrammes(
+                  programmesDispatch,
+                  programmes.query,
+                  pageNumber
+                );
               }}
             >
               {index + 1}

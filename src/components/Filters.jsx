@@ -5,8 +5,13 @@ import { Filter } from './Filter';
 import { ProgrammeContext } from '../pages/HomePage';
 
 export function Filters() {
-  const { filters, filtersDispatch, searchProgrammes, programmes } =
-    useContext(ProgrammeContext);
+  const {
+    filters,
+    filtersDispatch,
+    searchProgrammes,
+    programmesDispatch,
+    programmes,
+  } = useContext(ProgrammeContext);
 
   const filterProps = {
     university: {
@@ -17,6 +22,7 @@ export function Filters() {
       reset: () => filtersDispatch({ type: 'UNI_RESET' }),
       research: (id) =>
         searchProgrammes(
+          programmesDispatch,
           programmes.query,
           1,
           filters.universityIds.includes(id)
@@ -34,6 +40,7 @@ export function Filters() {
       reset: () => filtersDispatch({ type: 'SUBJECT_RESET' }),
       research: (id) =>
         searchProgrammes(
+          programmesDispatch,
           programmes.query,
           1,
           filters.universityIds,

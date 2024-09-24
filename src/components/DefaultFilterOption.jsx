@@ -7,7 +7,8 @@ export default function DefaultFilterOption({
   handleDefaultOption,
   defaultOptionSelected,
 }) {
-  const { searchProgrammes, programmes } = useContext(ProgrammeContext);
+  const { searchProgrammes, programmes, programmesDispatch } =
+    useContext(ProgrammeContext);
   const { title, filter } = useContext(FilterContext);
 
   return (
@@ -15,7 +16,7 @@ export default function DefaultFilterOption({
       onClick={() => {
         handleDefaultOption();
         filter.reset();
-        searchProgrammes(programmes.query);
+        searchProgrammes(programmesDispatch, programmes.query);
       }}
       className={`flex cursor-pointer gap-3 p-2 ${defaultOptionSelected && 'bg-neutral-100'}`}
     >

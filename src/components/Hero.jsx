@@ -1,7 +1,9 @@
-import { useRef } from 'react';
+import { useContext, useRef } from 'react';
+import { ProgrammeContext } from '../pages/HomePage';
 
-export function Hero({ searchProgrammes }) {
+export function Hero() {
   const searchInputRef = useRef(null);
+  const { searchProgrammes, programmesDispatch } = useContext(ProgrammeContext);
 
   return (
     <div className="bg-white">
@@ -13,7 +15,7 @@ export function Hero({ searchProgrammes }) {
           className="mx-auto mt-10 flex items-center"
           onSubmit={(e) => {
             e.preventDefault();
-            searchProgrammes(searchInputRef.current.value);
+            searchProgrammes(programmesDispatch, searchInputRef.current.value);
           }}
           autoComplete="off"
         >
