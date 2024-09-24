@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import Checkbox from './Checkbox';
 import DefaultFilterOption from './DefaultFilterOption';
+import FilterOption from './FilterOption';
 
 export default function FilterOverlay({
   options,
@@ -31,24 +31,13 @@ export default function FilterOverlay({
             resetFilter={filter.reset}
             title={title}
           />
-          {options.map((e) => (
-            <li
-              key={e.id}
-              value={e.name}
-              className={`flex cursor-pointer items-center gap-3 p-2 ${filter.selected(e.id) && 'bg-neutral-100'}`}
-              onClick={() => {
-                setResetSelected(false);
-                filter.dispatch(e.id);
-                filter.research(e.id);
-              }}
-            >
-              {filter.selected(e.id) ? (
-                <Checkbox checked={true} />
-              ) : (
-                <Checkbox checked={false} />
-              )}
-              <span>{e.name}</span>
-            </li>
+          {options.map((option) => (
+            <FilterOption
+              key={option.id}
+              {...option}
+              handleReset={() => setResetSelected(false)}
+              filter={filter}
+            />
           ))}
         </ul>
       </div>
