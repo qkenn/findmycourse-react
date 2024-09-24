@@ -1,4 +1,4 @@
-import { createContext, useReducer } from 'react';
+import { createContext, useEffect, useReducer } from 'react';
 import { Hero } from '../components/Hero';
 import { Filters } from '../components/Filters';
 import { HomeProgrammes } from '../components/HomeProgrammes';
@@ -71,6 +71,10 @@ export function HomePage() {
     universityIds: [],
     subjectIds: [],
   });
+
+  useEffect(() => {
+    document.title = 'Home';
+  }, []);
 
   function searchProgrammes(q, page = 1, university = [], subject = []) {
     programmesDispatch({ type: 'SEARCH_START' });

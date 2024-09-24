@@ -1,9 +1,14 @@
 import { useNavigation } from 'react-router-dom';
 import { ExploreCard } from '../components/ExploreCard';
 import { Loading } from '../components/Loading';
+import { useEffect } from 'react';
 
 export function ExplorePage() {
   const { state } = useNavigation();
+
+  useEffect(() => {
+    document.title = 'Explore';
+  }, []);
 
   return (
     <>
