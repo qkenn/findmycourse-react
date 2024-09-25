@@ -54,7 +54,7 @@ export function FiltersContainer() {
   };
 
   return (
-    <section className="col-span-4 self-start rounded-sm bg-white p-7">
+    <section className="rounded-sm bg-white p-7 md:col-span-4 md:self-start">
       <div className="flex justify-between">
         <h3 className="text-2xl font-semibold">Filters</h3>
         {(filters.universityIds.length > 0 ||

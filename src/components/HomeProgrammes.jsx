@@ -12,7 +12,7 @@ export function HomeProgrammes() {
       : Math.ceil((programmes.count || 0) / (programmes.pageSize || 8));
 
   return (
-    <section className="col-span-8">
+    <section className="md:col-span-8">
       <ul className="flex flex-col gap-10">
         {programmes.results &&
           programmes.results.map((p) => (
