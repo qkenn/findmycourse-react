@@ -3,7 +3,13 @@ import FilterOverlay from './FilterOverlay';
 
 export const FilterContext = createContext();
 
-export function Filter({ options, title, filter, defaultOptionText }) {
+export function Filter({
+  options,
+  title,
+  filter,
+  defaultOptionText,
+  filterCount,
+}) {
   const [showOverlay, setShowOverlay] = useState(false);
 
   return (
@@ -17,7 +23,9 @@ export function Filter({ options, title, filter, defaultOptionText }) {
       }}
     >
       <div className="relative">
-        <h4 className="text-sm">{title}</h4>
+        <h4 className="text-sm">
+          <span>{title}</span> {filterCount > 0 && <span>({filterCount})</span>}
+        </h4>
         <button
           className="mt-2 block w-full border-[1px] border-neutral-600/50 px-3 py-1 text-start"
           onClick={() => setShowOverlay(true)}

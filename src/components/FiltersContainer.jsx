@@ -77,6 +77,7 @@ export function FiltersContainer() {
           defaultOptionText="All Universities"
           options={universities}
           filter={filterProps.university}
+          filterCount={filters.universityIds.length}
         />
 
         <Filter
@@ -84,6 +85,7 @@ export function FiltersContainer() {
           defaultOptionText="All Subjects"
           options={subjects}
           filter={filterProps.subject}
+          filterCount={filters.subjectIds.length}
         />
       </div>
     </section>
