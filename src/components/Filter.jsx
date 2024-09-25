@@ -3,7 +3,7 @@ import FilterOverlay from './FilterOverlay';
 
 export const FilterContext = createContext();
 
-export function Filter({ options, title, filter }) {
+export function Filter({ options, title, filter, defaultOptionText }) {
   const [showOverlay, setShowOverlay] = useState(false);
 
   return (
@@ -11,6 +11,7 @@ export function Filter({ options, title, filter }) {
       value={{
         options,
         title,
+        defaultOptionText,
         filter,
         closeOverlay: () => setShowOverlay(false),
       }}

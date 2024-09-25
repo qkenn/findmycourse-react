@@ -55,17 +55,33 @@ export function FiltersContainer() {
 
   return (
     <section className="col-span-4 self-start rounded-sm bg-white p-7">
-      <h3 className="text-2xl font-semibold">Filters</h3>
+      <div className="flex justify-between">
+        <h3 className="text-2xl font-semibold">Filters</h3>
+        {(filters.universityIds.length > 0 ||
+          filters.subjectIds.length > 0) && (
+          <button
+            onClick={() => {
+              filtersDispatch({ type: 'RESET_ALL' });
+              searchProgrammes(programmesDispatch, programmes.query);
+            }}
+            className="rounded-sm bg-neutral-900 px-5 py-2 text-white"
+          >
+            Reset
+          </button>
+        )}
+      </div>
 
       <div className="mt-5 flex flex-col gap-4">
         <Filter
           title="University"
+          defaultOptionText="All Universities"
           options={universities}
           filter={filterProps.university}
         />
 
         <Filter
           title="Subject"
+          defaultOptionText="All Subjects"
           options={subjects}
           filter={filterProps.subject}
         />

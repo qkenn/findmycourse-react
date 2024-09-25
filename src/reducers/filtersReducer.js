@@ -25,6 +25,11 @@ export function FiltersReducer(state, { type, payload }) {
         ...state,
         universityIds: [],
       };
+    case 'RESET_ALL':
+      return {
+        universityIds: [],
+        subjectIds: [],
+      };
     default:
       return state;
   }

@@ -9,7 +9,7 @@ export default function DefaultFilterOption({
 }) {
   const { searchProgrammes, programmes, programmesDispatch } =
     useContext(ProgrammeContext);
-  const { title, filter } = useContext(FilterContext);
+  const { filter, defaultOptionText } = useContext(FilterContext);
 
   return (
     <li
@@ -26,7 +26,7 @@ export default function DefaultFilterOption({
         <Checkbox checked={false} />
       )}
 
-      <span>{`All ${title}s`}</span>
+      <span>{defaultOptionText}</span>
     </li>
   );
 }
