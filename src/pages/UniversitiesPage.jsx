@@ -1,7 +1,7 @@
 import { useLoaderData, useNavigation } from 'react-router-dom';
 import { UniversityCard } from '../components/UniversityCard';
 import { Loading } from '../components/Loading';
-import { Breadcrumb } from '../components/BreadCrumb';
+import { Breadcrumb } from '../components/navigation/BreadCrumb';
 
 export function UniversitiesPage() {
   const { state } = useNavigation();

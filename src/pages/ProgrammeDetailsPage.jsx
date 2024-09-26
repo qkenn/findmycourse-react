@@ -1,5 +1,5 @@
 import { useLoaderData } from 'react-router-dom';
-import { Breadcrumb } from '../components/BreadCrumb';
+import { Breadcrumb } from '../components/navigation/BreadCrumb';
 
 export function ProgrammeDetailsPage() {
   const programme = useLoaderData();

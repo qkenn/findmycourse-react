@@ -1,7 +1,7 @@
 import { useLoaderData, useNavigation } from 'react-router-dom';
 import { ProgrammeCard } from '../components/ProgrammeCard';
 import { Loading } from '../components/Loading';
-import { Breadcrumb } from '../components/BreadCrumb';
+import { Breadcrumb } from '../components/navigation/BreadCrumb';
 
 export function ProgrammesPage() {
   const { state } = useNavigation();

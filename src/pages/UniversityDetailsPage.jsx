@@ -1,6 +1,6 @@
 import { useLoaderData } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import { Breadcrumb } from '../components/BreadCrumb';
+import { Breadcrumb } from '../components/navigation/BreadCrumb';
 
 export function UniversityDetailsPage() {
   const university = useLoaderData();

@@ -1,7 +1,7 @@
 import { useLoaderData, useNavigation } from 'react-router-dom';
 import { SubjectCard } from '../components/SubjectCard';
 import { Loading } from '../components/Loading';
-import { Breadcrumb } from '../components/BreadCrumb';
+import { Breadcrumb } from '../components/navigation/BreadCrumb';
 
 export function SubjectsPage() {
   const { state } = useNavigation();
