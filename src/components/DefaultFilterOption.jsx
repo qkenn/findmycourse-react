@@ -9,13 +9,13 @@ export default function DefaultFilterOption({
 }) {
   const { searchProgrammes, programmes, programmesDispatch } =
     useContext(ProgrammeContext);
-  const { filter, defaultOptionText } = useContext(FilterContext);
+  const { reset, defaultOptionText } = useContext(FilterContext);
 
   return (
     <li
       onClick={() => {
         handleDefaultOption();
-        filter.reset();
+        reset();
         searchProgrammes(programmesDispatch, programmes.query);
       }}
       className={`flex cursor-pointer gap-3 p-2 ${defaultOptionSelected && 'bg-neutral-100'}`}

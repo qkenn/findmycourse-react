@@ -4,11 +4,16 @@ import FilterOverlay from './FilterOverlay';
 export const FilterContext = createContext();
 
 export function Filter({
-  options,
-  title,
-  filter,
-  defaultOptionText,
-  filterCount,
+  props: {
+    title,
+    ids,
+    options,
+    reset,
+    selected,
+    dispatch,
+    research,
+    defaultOptionText,
+  },
 }) {
   const [showOverlay, setShowOverlay] = useState(false);
 
@@ -18,13 +23,19 @@ export function Filter({
         options,
         title,
         defaultOptionText,
-        filter,
+        reset,
+        selected,
+        dispatch,
+        research,
         closeOverlay: () => setShowOverlay(false),
       }}
     >
       <div>
         <h4 className="text-sm">
-          <span>{title}</span> {filterCount > 0 && <span>({filterCount})</span>}
+          <span>{title}</span>
+          {ids.length > 0 && (
+            <span className="ml-1 inline-block">({ids.length})</span>
+          )}
         </h4>
         <button
           className="relative mt-2 block w-full border-[1px] border-neutral-600/50 px-3 py-1 text-start"

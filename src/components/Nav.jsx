@@ -8,7 +8,7 @@ export function Nav() {
   return (
     <>
       <header
-        className={`${hamburgerSelected ? 'fixed left-0 right-0 top-0' : 'relative'} z-30 bg-neutral-950 py-5`}
+        className={`${hamburgerSelected ? 'fixed left-0 right-0 top-0' : 'relative'} z-30 bg-neutral-950 py-3`}
       >
         <div className="mx-auto flex max-w-main items-center justify-between px-5 xl:px-0">
           <SiteLogo />
