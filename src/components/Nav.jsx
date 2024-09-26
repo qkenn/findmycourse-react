@@ -10,7 +10,7 @@ export function Nav() {
       <header
         className={`${hamburgerSelected ? 'fixed left-0 right-0 top-0' : 'relative'} z-30 bg-neutral-950 py-5`}
       >
-        <div className="mx-auto flex max-w-[60rem] items-center justify-between px-5 md:px-0">
+        <div className="mx-auto flex max-w-main items-center justify-between px-5 xl:px-0">
           <SiteLogo />
 
           <nav
@@ -28,7 +28,7 @@ export function Nav() {
             onClick={() => setHamburgerSelected((h) => !h)}
           >
             <div
-              className={`relative h-[2px] w-[25px] bg-white transition-all before:absolute before:bottom-[7px] before:left-0 before:h-full before:w-full before:bg-white before:transition-all after:absolute after:left-0 after:top-[7px] after:h-full after:w-full after:bg-white after:transition-all sm:hidden ${hamburgerSelected && 'before:translate-y-[7px] before:rotate-45 after:-translate-y-[7px] after:-rotate-45'}`}
+              className={`relative h-[2px] w-[25px] bg-white transition-all before:absolute before:bottom-[7px] before:left-0 before:h-full before:w-full before:bg-white before:transition-all after:absolute after:left-0 after:top-[7px] after:h-full after:w-full after:bg-white after:transition-all sm:hidden ${hamburgerSelected && 'bg-transparent before:translate-y-[7px] before:rotate-45 after:-translate-y-[7px] after:-rotate-45'}`}
               type="button"
               aria-label="Toggle menu"
             ></div>

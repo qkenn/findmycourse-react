@@ -45,7 +45,7 @@ export function Hero({ initialize }) {
             </div>
           </label>
 
-          <button className="mx-auto mt-5 block rounded-sm border-[1px] border-neutral-950 bg-neutral-950 px-8 py-2 text-white transition-colors focus:bg-neutral-700 focus:outline-none md:mx-0 md:ml-5 md:mt-0 md:self-end">
+          <button className="mx-auto mt-5 block rounded-sm border-[1px] border-neutral-950 bg-neutral-950 px-10 py-2 text-white transition-colors focus:bg-neutral-700 focus:outline-none md:mx-0 md:ml-5 md:mt-0 md:self-end md:px-8">
             Find
           </button>
         </form>

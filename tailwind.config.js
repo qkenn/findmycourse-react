@@ -19,7 +19,7 @@ export default {
     },
     extend: {
       maxWidth: {
-        main: '60rem',
+        main: '62.5rem',
       },
       animation: {
         pulse: 'pulse 1s ease-in-out alternate infinite',
