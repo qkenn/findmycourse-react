@@ -13,9 +13,9 @@ export default function SearchError({ errorMessage }) {
   }
 
   return (
-    <div>
+    <div className="px-5">
       <div className="mx-auto max-w-56">{image}</div>
-      <p className="mt-3 px-5 text-center">{message}</p>
+      <h4 className="mt-3 text-center">{message}</h4>
     </div>
   );
 }
