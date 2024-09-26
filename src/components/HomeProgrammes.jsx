@@ -3,6 +3,7 @@ import { ProgrammeContext } from '../pages/HomePage';
 import { HomeProgrammeCard } from './HomeProgrammeCard';
 import { Loading } from './Loading';
 import PaginationLink from './PaginationLink';
+import SearchError from './SearchError';
 
 export function HomeProgrammes() {
   const { programmes } = useContext(ProgrammeContext);
@@ -19,7 +20,9 @@ export function HomeProgrammes() {
             <HomeProgrammeCard key={p.id} {...p} />
           ))}
 
-        {programmes.searchError && <p>{programmes.searchError}</p>}
+        {programmes.errorMessage && (
+          <SearchError errorMessage={programmes.errorMessage} />
+        )}
 
         {programmes.isLoading && <Loading cardsCount={6} page="home" />}
 

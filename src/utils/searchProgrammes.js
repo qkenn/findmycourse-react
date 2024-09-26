@@ -41,7 +41,7 @@ export function searchProgrammes(
     .catch((e) => {
       programmesDispatch({
         type: 'SEARCH_ERROR',
-        payload: { error: e.message, q },
+        payload: { errorMessage: e.message, q },
       });
     });
 }

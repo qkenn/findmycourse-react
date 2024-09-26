@@ -18,7 +18,7 @@ export function programmesReducer(programmes, { type, payload }) {
     case 'SEARCH_ERROR':
       return {
         isLoading: false,
-        searchError: payload.error,
+        errorMessage: payload.errorMessage,
         query: payload.q,
       };
     default:

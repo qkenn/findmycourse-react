@@ -22,22 +22,21 @@ export function Filter({
         closeOverlay: () => setShowOverlay(false),
       }}
     >
-      <div className="relative">
+      <div>
         <h4 className="text-sm">
           <span>{title}</span> {filterCount > 0 && <span>({filterCount})</span>}
         </h4>
         <button
-          className="mt-2 block w-full border-[1px] border-neutral-600/50 px-3 py-1 text-start"
+          className="relative mt-2 block w-full border-[1px] border-neutral-600/50 px-3 py-1 text-start"
           onClick={() => setShowOverlay(true)}
         >
           {`Select ${title}`}
+          <div className="pointer-events-none absolute right-4 top-1 bg-white pl-1">
+            <img src="/arrow_down-black-87.svg" />
+          </div>
         </button>
-        {showOverlay && <FilterOverlay />}
-        <img
-          src="/arrow_down-black-87.svg"
-          className="pointer-events-none absolute right-4 top-8"
-        />
       </div>
+      {showOverlay && <FilterOverlay />}
     </FilterContext.Provider>
   );
 }
