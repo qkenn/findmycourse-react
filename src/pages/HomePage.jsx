@@ -4,7 +4,7 @@ import { programmesReducer } from '../reducers/programmesReducer';
 import { FiltersReducer } from '../reducers/filtersReducer';
 import { searchProgrammes } from '../utils/searchProgrammes';
 import ProgrammesGrid from '../components/ProgrammesGrid';
-import GeneralInfo from '../components/GeneralInfo';
+import InfoSection from '../components/InfoSection';
 
 export const ProgrammeContext = createContext();
 
@@ -29,20 +29,19 @@ export function HomePage() {
           searchProgrammes,
           filtersDispatch,
           filters,
-        }}
-      >
-        <Hero
-          initialize={() => {
+          initialize: () => {
             if (!initialized) {
               setInitialized(true);
             }
-          }}
-        />
+          },
+        }}
+      >
+        <Hero />
 
         {initialized && <ProgrammesGrid />}
       </ProgrammeContext.Provider>
 
-      <GeneralInfo />
+      <InfoSection />
     </>
   );
 }

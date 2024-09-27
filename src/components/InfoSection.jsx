@@ -1,6 +1,6 @@
 import InfoCard from './InfoCard';
 
-export default function GeneralInfo() {
+export default function InfoSection() {
   return (
     <section className="mx-auto my-16 flex max-w-main flex-col gap-10 px-5 md:my-32 md:flex-row md:justify-between xl:px-0">
       <InfoCard
