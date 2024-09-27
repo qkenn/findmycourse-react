@@ -1,6 +1,6 @@
 import { useContext } from 'react';
+import { FilterContext } from './FilterSelectBtn';
 import Checkbox from './Checkbox';
-import { FilterContext } from './Filter';
 
 export default function FilterOption({ name, id, handleDefaultOption }) {
   const { selected, dispatch, research } = useContext(FilterContext);

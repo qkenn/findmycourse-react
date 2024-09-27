@@ -1,7 +1,7 @@
 import { useContext } from 'react';
-import { ProgrammeContext } from '../pages/HomePage';
+import { ProgrammeContext } from '../../pages/HomePage';
 import Checkbox from './Checkbox';
-import { FilterContext } from './Filter';
+import { FilterContext } from './FilterSelectBtn';
 
 export default function DefaultFilterOption({
   handleDefaultOption,

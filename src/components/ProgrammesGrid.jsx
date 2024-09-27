@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { FiltersContainer } from './FiltersContainer';
+import { FiltersContainer } from './filter/FiltersContainer';
 import { HomeProgrammes } from './HomeProgrammes';
 import { ProgrammeContext } from '../pages/HomePage';
 import PaginationInfo from './PaginationInfo';

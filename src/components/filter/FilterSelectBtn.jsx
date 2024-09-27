@@ -3,7 +3,7 @@ import FilterOverlay from './FilterOverlay';
 
 export const FilterContext = createContext();
 
-export function Filter({
+export default function FilterSelectBtn({
   props: {
     title,
     ids,

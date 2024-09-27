@@ -1,8 +1,8 @@
 import { useContext, useState } from 'react';
+import { FilterContext } from './FilterSelectBtn';
+import OverlayCloseBtn from './OverlayCloseBtn';
 import DefaultFilterOption from './DefaultFilterOption';
 import FilterOption from './FilterOption';
-import OverlayCloseBtn from './OverlayCloseBtn';
-import { FilterContext } from './Filter';
 
 export default function FilterOverlay() {
   const [defaultOptionSelected, setDefaultOptionSelected] = useState(false);

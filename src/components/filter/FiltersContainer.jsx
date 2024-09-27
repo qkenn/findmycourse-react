@@ -1,9 +1,10 @@
 import { useContext } from 'react';
-import subjects from '../data/subjects.json';
-import universities from '../data/universities.json';
-import { Filter } from './Filter';
-import { ProgrammeContext } from '../pages/HomePage';
-import { createFilterProps } from '../utils/createFilterProps';
+import subjects from '../../data/subjects.json';
+import universities from '../../data/universities.json';
+import { ProgrammeContext } from '../../pages/HomePage';
+import { createFilterProps } from '../../utils/createFilterProps';
+import FiltersResetBtn from './FiltersResetBtn';
+import FilterSelectBtn from './FilterSelectBtn';
 
 export function FiltersContainer() {
   const {
@@ -16,6 +17,8 @@ export function FiltersContainer() {
 
   const universityIds = filters.universityIds;
   const subjectIds = filters.subjectIds;
+  const universitiesCount = universityIds.length;
+  const subjectsCount = subjectIds.length;
 
   const filterProps = {
     university: createFilterProps({
@@ -50,25 +53,17 @@ export function FiltersContainer() {
     <section className="rounded-sm bg-white p-10 md:col-span-4 md:self-start md:p-8">
       <div className="flex items-center justify-between">
         <h3 className="text-2xl font-semibold">Filters</h3>
-        {(universityIds.length > 0 || subjectIds.length > 0) && (
-          <button
-            onClick={() => {
-              filtersDispatch({ type: 'RESET_ALL' });
-              searchProgrammes(programmesDispatch, programmes.query);
-            }}
-            className="font-semibold text-red-700"
-          >
-            Reset{' '}
-            {(universityIds.length > 0 || subjectIds.length > 0) &&
-              `(${universityIds.length + subjectIds.length})`}
-          </button>
+        {(universitiesCount > 0 || subjectsCount > 0) && (
+          <FiltersResetBtn
+            universitiesCount={universitiesCount}
+            subjectsCount={subjectsCount}
+          />
         )}
       </div>
 
       <div className="mt-5 flex flex-col gap-5">
-        <Filter props={filterProps.university} />
-
-        <Filter props={filterProps.subject} />
+        <FilterSelectBtn props={filterProps.university} />
+        <FilterSelectBtn props={filterProps.subject} />
       </div>
     </section>
   );
