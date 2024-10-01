@@ -5,9 +5,11 @@ import { Outlet } from 'react-router-dom';
 export function MainLayout() {
   return (
     <>
-      <Header />
-      <Outlet />
-      <Footer />
+      <div className="grid min-h-[100dvh] grid-rows-[auto_1fr_auto]">
+        <Header />
+        <Outlet />
+        <Footer />
+      </div>
     </>
   );
 }
