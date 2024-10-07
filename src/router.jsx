@@ -2,12 +2,9 @@ import { createBrowserRouter } from 'react-router-dom';
 import { HomePage } from './pages/HomePage';
 import { MainLayout } from './layouts/MainLayout';
 import { ExplorePage } from './pages/ExplorePage';
-import { SubjectsPage } from './pages/SubjectsPage';
-import { UniversitiesPage } from './pages/UniversitiesPage';
-import { ProgrammesPage } from './pages/ProgrammesPage';
-import { CoursesPage } from './pages/CoursesPage';
 import { AppError, NotFound } from './pages/Erros';
 import { DetailsPage } from './pages/DetailsPage';
+import { EntityPage } from './pages/EntityPage';
 
 export const router = createBrowserRouter([
   {
@@ -28,7 +25,7 @@ export const router = createBrowserRouter([
             children: [
               {
                 index: true,
-                element: <SubjectsPage />,
+                element: <EntityPage type="subject" />,
                 loader: ({ request: { signal } }) => {
                   return fetch('http://localhost:8080/api/subjects', signal);
                 },
@@ -50,7 +47,7 @@ export const router = createBrowserRouter([
             children: [
               {
                 index: true,
-                element: <CoursesPage />,
+                element: <EntityPage type="course" />,
                 loader: ({ request: { signal } }) => {
                   return fetch('http://localhost:8080/api/courses', signal);
                 },
@@ -72,7 +69,7 @@ export const router = createBrowserRouter([
             children: [
               {
                 index: true,
-                element: <ProgrammesPage />,
+                element: <EntityPage type="programme" />,
                 loader: ({ request: { signal } }) => {
                   return fetch('http://localhost:8080/api/programmes', signal);
                 },
@@ -94,7 +91,7 @@ export const router = createBrowserRouter([
             children: [
               {
                 index: true,
-                element: <UniversitiesPage />,
+                element: <EntityPage type="university" />,
                 loader: ({ request: { signal } }) => {
                   return fetch(
                     'http://localhost:8080/api/universities',

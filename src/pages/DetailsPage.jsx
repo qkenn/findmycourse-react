@@ -11,20 +11,19 @@ export function DetailsPage({ type }) {
   const data = useLoaderData();
 
   const pages = [
-    { type: 'course', component: <CourseDetails data={data} /> },
-    { type: 'subject', component: <SubjectDetails data={data} /> },
-    { type: 'university', component: <UniversityDetails data={data} /> },
-    { type: 'programme', component: <ProgrammeDetails data={data} /> },
+    { type: 'course', component: CourseDetails },
+    { type: 'subject', component: SubjectDetails },
+    { type: 'university', component: UniversityDetails },
+    { type: 'programme', component: ProgrammeDetails },
   ];
 
-  const page = pages.find((page) => page.type === type);
+  const DetailsComponent = pages.find((page) => page.type === type).component;
 
   return (
     <main className="my-20 bg-neutral-100">
       <section className="mx-auto max-w-main">
         <Breadcrumb />
-
-        {page.component}
+        <DetailsComponent data={data} />
       </section>
     </main>
   );
