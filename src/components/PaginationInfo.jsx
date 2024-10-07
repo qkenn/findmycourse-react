@@ -6,9 +6,7 @@ export default function PaginationInfo() {
 
   return (
     <div>
-      Showing {(programmes.page - 1) * programmes.pageSize + 1} -{' '}
-      {(programmes.page - 1) * programmes.pageSize + programmes.results.length}{' '}
-      of {programmes.count} results.
+      {`Showing ${(programmes.page - 1) * programmes.pageSize + 1} - ${(programmes.page - 1) * programmes.pageSize + programmes.results.length} of ${programmes.count} results.`}
     </div>
   );
 }
