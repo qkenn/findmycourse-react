@@ -17,7 +17,7 @@ export function ExplorePage() {
           {state === 'loading' ? (
             <Loading cardsCount={12} page="explore" />
           ) : (
-            <ul className="grid grid-cols-2 gap-12">
+            <ul className="grid grid-cols-1 gap-10 px-5 md:grid-cols-2 md:gap-20 xl:px-0">
               <ExploreCard
                 url="subjects"
                 desc="All courses offered by universities grouped into relevent subjects"

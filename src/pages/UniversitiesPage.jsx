@@ -2,28 +2,29 @@ import { useLoaderData, useNavigation } from 'react-router-dom';
 import { UniversityCard } from '../components/UniversityCard';
 import { Loading } from '../components/Loading';
 import { Breadcrumb } from '../components/navigation/BreadCrumb';
+import { Section, TwoColGrid } from '../components/Containers';
 
 export function UniversitiesPage() {
   const { state } = useNavigation();
   const universities = useLoaderData();
 
   return (
-    <main className="mx-auto my-20 max-w-main">
-      <section>
+    <main>
+      <Section>
         {state === 'loading' ? (
           <Loading page="details" />
         ) : (
           <>
             <Breadcrumb />
 
-            <ul className="mt-5 grid grid-cols-2 gap-12">
+            <TwoColGrid>
               {universities.map((university) => (
                 <UniversityCard key={university.id} {...university} />
               ))}
-            </ul>
+            </TwoColGrid>
           </>
         )}
-      </section>
+      </Section>
     </main>
   );
 }

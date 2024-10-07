@@ -6,15 +6,11 @@ export function SubjectCard({ id, name, courses }) {
       to={`/explore/subjects/${id}`}
       className="self-start rounded-sm bg-white p-10"
     >
-      <div className="flex justify-between">
-        <h2
-          className={`${courses.length > 0 ? 'max-w-[15rem]' : null} text-xl font-semibold`}
-        >
-          {name}
-        </h2>
+      <div>
+        <h2 className="text-xl font-semibold">{name}</h2>
 
         {courses.length > 0 && (
-          <div>
+          <div className="mt-3 inline-block text-neutral-700 hover:underline">
             {courses.length === 1 ? '1 Course' : `${courses.length} Courses`}
           </div>
         )}
