@@ -1,6 +1,5 @@
 import { useNavigation } from 'react-router-dom';
 import { Loading } from '../components/Loading';
-import { useEffect } from 'react';
 import { CenteredContainer, TwoColGrid } from '../components/Containers';
 import { ExplorePageCard } from '../components/Cards';
 
@@ -9,10 +8,6 @@ const cards = cardTypes.map((t) => <ExplorePageCard key={t} type={t} />);
 
 export function ExplorePage() {
   const { state } = useNavigation();
-
-  useEffect(() => {
-    document.title = 'Explore';
-  }, []);
 
   return (
     <>

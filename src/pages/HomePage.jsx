@@ -1,4 +1,4 @@
-import { createContext, useEffect, useReducer, useState } from 'react';
+import { createContext, useReducer, useState } from 'react';
 import { Hero } from '../components/Hero';
 import { programmesReducer } from '../reducers/programmesReducer';
 import { FiltersReducer } from '../reducers/filtersReducer';
@@ -15,10 +15,6 @@ export function HomePage() {
     subjectIds: [],
   });
   const [initialized, setInitialized] = useState(false);
-
-  useEffect(() => {
-    document.title = 'Home';
-  }, []);
 
   return (
     <>
