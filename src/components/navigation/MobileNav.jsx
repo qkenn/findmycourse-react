@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { MobileNavLink } from '../Links';
 
 export default function MobileNav({ hamSelected, closeHamMenu }) {
   return (
@@ -7,12 +7,12 @@ export default function MobileNav({ hamSelected, closeHamMenu }) {
       aria-label="Mobile Navigation"
     >
       <ul className="flex flex-col gap-10 text-4xl font-semibold text-white">
-        <Link to="/" onClick={closeHamMenu}>
-          Home
-        </Link>
-        <Link to="/explore" onClick={closeHamMenu}>
-          Explore
-        </Link>
+        <MobileNavLink text="Home" closeHandler={closeHamMenu} href="/" />
+        <MobileNavLink
+          text="Explore"
+          closeHandler={closeHamMenu}
+          href="/explore"
+        />
       </ul>
     </nav>
   );
