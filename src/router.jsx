@@ -2,18 +2,18 @@ import { createBrowserRouter } from 'react-router-dom';
 import { HomePage } from './pages/HomePage';
 import { MainLayout } from './layouts/MainLayout';
 import { ExplorePage } from './pages/ExplorePage';
-import { AppError, NotFound } from './pages/Erros';
-import { DetailsPage } from './pages/DetailsPage';
+import { AppErrorPage, NotFoundPage } from './components/Erros';
+import EntityDetailsPage from './pages/EntityDetailsPage';
 import { EntityPage } from './pages/EntityPage';
 
 export const router = createBrowserRouter([
   {
     element: <MainLayout />,
-    errorElement: <AppError />,
+    errorElement: <AppErrorPage />,
     children: [
       {
         path: '*',
-        element: <NotFound />,
+        element: <NotFoundPage />,
       },
       { path: '/', element: <HomePage /> },
       {
@@ -32,7 +32,7 @@ export const router = createBrowserRouter([
               },
               {
                 path: ':id',
-                element: <DetailsPage type="subject" />,
+                element: <EntityDetailsPage type="subject" />,
                 loader: ({ params: { id }, request: { signal } }) => {
                   return fetch(
                     `http://localhost:8080/api/subjects/${id}`,
@@ -54,7 +54,7 @@ export const router = createBrowserRouter([
               },
               {
                 path: ':id',
-                element: <DetailsPage type="course" />,
+                element: <EntityDetailsPage type="course" />,
                 loader: ({ params: { id }, request: { signal } }) => {
                   return fetch(
                     `http://localhost:8080/api/courses/${id}`,
@@ -76,7 +76,7 @@ export const router = createBrowserRouter([
               },
               {
                 path: ':id',
-                element: <DetailsPage type="programme" />,
+                element: <EntityDetailsPage type="programme" />,
                 loader: ({ params: { id }, request: { signal } }) => {
                   return fetch(
                     `http://localhost:8080/api/programmes/${id}`,
@@ -101,7 +101,7 @@ export const router = createBrowserRouter([
               },
               {
                 path: ':id',
-                element: <DetailsPage type="university" />,
+                element: <EntityDetailsPage type="university" />,
                 loader: ({ params: { id }, request: { signal } }) => {
                   return fetch(
                     `http://localhost:8080/api/universities/${id}`,
