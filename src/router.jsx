@@ -9,14 +9,13 @@ import { CoursesPage } from './pages/CoursesPage';
 import { CourseDetailsPage } from './pages/CourseDetailsPage';
 import { ProgrammeDetailsPage } from './pages/ProgrammeDetailsPage';
 import { UniversityDetailsPage } from './pages/UniversityDetailsPage';
-import { AppErrorPage } from './pages/AppErrorPage';
-import { NotFound } from './pages/NotFoundPage';
 import { SubjectDetailsPage } from './pages/SubjectDetailsPage';
+import { AppError, NotFound } from './pages/Erros';
 
 export const router = createBrowserRouter([
   {
     element: <MainLayout />,
-    errorElement: <AppErrorPage />,
+    errorElement: <AppError />,
     children: [
       {
         path: '*',
