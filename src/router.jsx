@@ -6,11 +6,8 @@ import { SubjectsPage } from './pages/SubjectsPage';
 import { UniversitiesPage } from './pages/UniversitiesPage';
 import { ProgrammesPage } from './pages/ProgrammesPage';
 import { CoursesPage } from './pages/CoursesPage';
-import { CourseDetailsPage } from './pages/CourseDetailsPage';
-import { ProgrammeDetailsPage } from './pages/ProgrammeDetailsPage';
-import { UniversityDetailsPage } from './pages/UniversityDetailsPage';
-import { SubjectDetailsPage } from './pages/SubjectDetailsPage';
 import { AppError, NotFound } from './pages/Erros';
+import { DetailsPage } from './pages/DetailsPage';
 
 export const router = createBrowserRouter([
   {
@@ -38,7 +35,7 @@ export const router = createBrowserRouter([
               },
               {
                 path: ':id',
-                element: <SubjectDetailsPage />,
+                element: <DetailsPage type="subject" />,
                 loader: ({ params: { id }, request: { signal } }) => {
                   return fetch(
                     `http://localhost:8080/api/subjects/${id}`,
@@ -60,7 +57,7 @@ export const router = createBrowserRouter([
               },
               {
                 path: ':id',
-                element: <CourseDetailsPage />,
+                element: <DetailsPage type="course" />,
                 loader: ({ params: { id }, request: { signal } }) => {
                   return fetch(
                     `http://localhost:8080/api/courses/${id}`,
@@ -82,7 +79,7 @@ export const router = createBrowserRouter([
               },
               {
                 path: ':id',
-                element: <ProgrammeDetailsPage />,
+                element: <DetailsPage type="programme" />,
                 loader: ({ params: { id }, request: { signal } }) => {
                   return fetch(
                     `http://localhost:8080/api/programmes/${id}`,
@@ -107,7 +104,7 @@ export const router = createBrowserRouter([
               },
               {
                 path: ':id',
-                element: <UniversityDetailsPage />,
+                element: <DetailsPage type="university" />,
                 loader: ({ params: { id }, request: { signal } }) => {
                   return fetch(
                     `http://localhost:8080/api/universities/${id}`,
