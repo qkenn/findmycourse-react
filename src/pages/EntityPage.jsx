@@ -1,7 +1,7 @@
 import { useLoaderData, useNavigation } from 'react-router-dom';
 import { Loading } from '../components/Loading';
 import { Breadcrumb } from '../components/navigation/BreadCrumb';
-import { Section, TwoColGrid } from '../components/Containers';
+import { CenteredContainer, TwoColGrid } from '../components/Containers';
 import {
   CourseCard,
   ProgrammeCard,
@@ -26,7 +26,7 @@ export function EntityPage({ type }) {
 
   return (
     <main>
-      <Section>
+      <CenteredContainer>
         {state === 'loading' ? (
           <Loading page="details" />
         ) : (
@@ -35,7 +35,7 @@ export function EntityPage({ type }) {
             <TwoColGrid>{cards}</TwoColGrid>
           </>
         )}
-      </Section>
+      </CenteredContainer>
     </main>
   );
 }

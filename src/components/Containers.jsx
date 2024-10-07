@@ -1,4 +1,4 @@
-export function Section({ children }) {
+export function CenteredContainer({ children }) {
   return (
     <section className="mx-auto my-20 max-w-main px-5 xl:px-0">
       {children}

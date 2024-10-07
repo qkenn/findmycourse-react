@@ -7,7 +7,7 @@ import {
   UniversityDetails,
 } from '../components/EntityDetails';
 
-export function DetailsPage({ type }) {
+export default function EntityDetailsPage({ type }) {
   const data = useLoaderData();
 
   const pages = [
