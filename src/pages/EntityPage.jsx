@@ -1,4 +1,4 @@
-import { useLoaderData, useNavigation } from 'react-router-dom';
+import { useLoaderData, useLocation, useNavigation } from 'react-router-dom';
 import { Loading } from '../components/Loading';
 import { Breadcrumb } from '../components/navigation/BreadCrumb';
 import { CenteredContainer, TwoColGrid } from '../components/Containers';
@@ -9,17 +9,21 @@ import {
   UniversityCard,
 } from '../components/Cards';
 
-export function EntityPage({ type }) {
+export function EntityPage() {
   const { state } = useNavigation();
   const data = useLoaderData();
+  const location = useLocation();
+  const type = location.pathname.split('/')[2];
+
+  console.log(type);
 
   const pages = [
-    { type: 'course', component: CourseCard },
-    { type: 'subject', component: SubjectCard },
-    { type: 'university', component: UniversityCard },
-    { type: 'programme', component: ProgrammeCard },
+    { type: 'courses', component: CourseCard },
+    { type: 'subjects', component: SubjectCard },
+    { type: 'universities', component: UniversityCard },
+    { type: 'programmes', component: ProgrammeCard },
   ];
-  const Card = pages.find((page) => page.type === type).component;
+  const Card = pages.find((page) => page.type === type)?.component;
   const cards = data.map((entity) => {
     return <Card key={entity.id} {...entity} />;
   });

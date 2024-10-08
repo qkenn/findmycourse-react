@@ -25,14 +25,14 @@ export const router = createBrowserRouter([
             children: [
               {
                 index: true,
-                element: <EntityPage type="subject" />,
+                element: <EntityPage />,
                 loader: ({ request: { signal } }) => {
                   return fetch('http://localhost:8080/api/subjects', signal);
                 },
               },
               {
                 path: ':id',
-                element: <EntityDetailsPage type="subject" />,
+                element: <EntityDetailsPage />,
                 loader: ({ params: { id }, request: { signal } }) => {
                   return fetch(
                     `http://localhost:8080/api/subjects/${id}`,
@@ -47,14 +47,14 @@ export const router = createBrowserRouter([
             children: [
               {
                 index: true,
-                element: <EntityPage type="course" />,
+                element: <EntityPage />,
                 loader: ({ request: { signal } }) => {
                   return fetch('http://localhost:8080/api/courses', signal);
                 },
               },
               {
                 path: ':id',
-                element: <EntityDetailsPage type="course" />,
+                element: <EntityDetailsPage />,
                 loader: ({ params: { id }, request: { signal } }) => {
                   return fetch(
                     `http://localhost:8080/api/courses/${id}`,
@@ -69,14 +69,14 @@ export const router = createBrowserRouter([
             children: [
               {
                 index: true,
-                element: <EntityPage type="programme" />,
+                element: <EntityPage />,
                 loader: ({ request: { signal } }) => {
                   return fetch('http://localhost:8080/api/programmes', signal);
                 },
               },
               {
                 path: ':id',
-                element: <EntityDetailsPage type="programme" />,
+                element: <EntityDetailsPage />,
                 loader: ({ params: { id }, request: { signal } }) => {
                   return fetch(
                     `http://localhost:8080/api/programmes/${id}`,
@@ -91,7 +91,7 @@ export const router = createBrowserRouter([
             children: [
               {
                 index: true,
-                element: <EntityPage type="university" />,
+                element: <EntityPage />,
                 loader: ({ request: { signal } }) => {
                   return fetch(
                     'http://localhost:8080/api/universities',
@@ -101,7 +101,7 @@ export const router = createBrowserRouter([
               },
               {
                 path: ':id',
-                element: <EntityDetailsPage type="university" />,
+                element: <EntityDetailsPage />,
                 loader: ({ params: { id }, request: { signal } }) => {
                   return fetch(
                     `http://localhost:8080/api/universities/${id}`,

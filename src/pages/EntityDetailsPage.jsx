@@ -1,4 +1,4 @@
-import { useLoaderData } from 'react-router-dom';
+import { useLoaderData, useLocation } from 'react-router-dom';
 import { Breadcrumb } from '../components/navigation/BreadCrumb';
 import {
   CourseDetails,
@@ -7,14 +7,16 @@ import {
   UniversityDetails,
 } from '../components/EntityDetails';
 
-export default function EntityDetailsPage({ type }) {
+export default function EntityDetailsPage() {
   const data = useLoaderData();
+  const location = useLocation();
+  const type = location.pathname.split('/')[2];
 
   const pages = [
-    { type: 'course', component: CourseDetails },
-    { type: 'subject', component: SubjectDetails },
-    { type: 'university', component: UniversityDetails },
-    { type: 'programme', component: ProgrammeDetails },
+    { type: 'courses', component: CourseDetails },
+    { type: 'subjects', component: SubjectDetails },
+    { type: 'universities', component: UniversityDetails },
+    { type: 'programmes', component: ProgrammeDetails },
   ];
 
   const DetailsComponent = pages.find((page) => page.type === type).component;
