@@ -1,9 +1,9 @@
 import { useContext } from 'react';
 import { ProgrammeContext } from '../pages/HomePage';
 import { HomeProgrammeCard } from './HomeProgrammeCard';
-import { Loading } from './Loading';
 import SearchError from './SearchError';
 import { PageLink, PaginationWrapper } from './Pagination';
+import { SearchResultsSkelton } from './Skeltons';
 
 export function HomeProgrammes() {
   const { programmes, searchProgrammes, programmesDispatch } =
@@ -24,7 +24,7 @@ export function HomeProgrammes() {
           <SearchError errorMessage={programmes.errorMessage} />
         )}
 
-        {programmes.isLoading && <Loading cardsCount={6} page="home" />}
+        {programmes.isLoading && <SearchResultsSkelton />}
 
         {programmes.results && (
           <PaginationWrapper>

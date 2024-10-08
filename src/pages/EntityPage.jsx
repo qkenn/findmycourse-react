@@ -1,5 +1,4 @@
 import { useLoaderData, useLocation, useNavigation } from 'react-router-dom';
-import { Loading } from '../components/Loading';
 import { Breadcrumb } from '../components/navigation/BreadCrumb';
 import { CenteredContainer, TwoColGrid } from '../components/Containers';
 import {
@@ -8,6 +7,7 @@ import {
   SubjectCard,
   UniversityCard,
 } from '../components/Cards';
+import { EntityDetailsSkelton } from '../components/Skeltons';
 
 export function EntityPage() {
   const { state } = useNavigation();
@@ -32,7 +32,7 @@ export function EntityPage() {
     <main>
       <CenteredContainer>
         {state === 'loading' ? (
-          <Loading page="details" />
+          <EntityDetailsSkelton />
         ) : (
           <>
             <Breadcrumb />
