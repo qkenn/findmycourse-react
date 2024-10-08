@@ -4,7 +4,7 @@ import { programmesReducer } from '../reducers/programmesReducer';
 import { FiltersReducer } from '../reducers/filtersReducer';
 import { searchProgrammes } from '../utils/searchProgrammes';
 import ProgrammesGrid from '../components/ProgrammesGrid';
-import InfoSection from '../components/InfoSection';
+import Features from '../components/Features';
 
 export const ProgrammeContext = createContext();
 
@@ -37,7 +37,7 @@ export function HomePage() {
         {initialized && <ProgrammesGrid />}
       </ProgrammeContext.Provider>
 
-      <InfoSection />
+      <Features />
     </>
   );
 }
