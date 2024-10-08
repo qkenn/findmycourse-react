@@ -1,17 +1,10 @@
 import { createBrowserRouter } from 'react-router-dom';
-import { HomePage } from './pages/HomePage';
-import { MainLayout } from './layouts/MainLayout';
-import { ExplorePage } from './pages/ExplorePage';
-import { SubjectsPage } from './pages/SubjectsPage';
-import { UniversitiesPage } from './pages/UniversitiesPage';
-import { ProgrammesPage } from './pages/ProgrammesPage';
-import { CoursesPage } from './pages/CoursesPage';
-import { CourseDetailsPage } from './pages/CourseDetailsPage';
-import { ProgrammeDetailsPage } from './pages/ProgrammeDetailsPage';
-import { UniversityDetailsPage } from './pages/UniversityDetailsPage';
-import { AppErrorPage } from './pages/AppErrorPage';
-import { NotFound } from './pages/NotFoundPage';
-import { SubjectDetailsPage } from './pages/SubjectDetailsPage';
+import { MainLayout } from './ui/layouts/MainLayout';
+import { AppErrorPage, NotFoundPage } from './ui/errors/PageErrors';
+import EntityDetailsPage from './ui/pages/EntityDetailsPage';
+import { EntityPage } from './ui/pages/EntityPage';
+import HomePage from './ui/pages/HomePage';
+import { ExplorePage } from './ui/pages/ExplorePage';
 
 export const router = createBrowserRouter([
   {
@@ -20,7 +13,7 @@ export const router = createBrowserRouter([
     children: [
       {
         path: '*',
-        element: <NotFound />,
+        element: <NotFoundPage />,
       },
       { path: '/', element: <HomePage /> },
       {
@@ -32,14 +25,14 @@ export const router = createBrowserRouter([
             children: [
               {
                 index: true,
-                element: <SubjectsPage />,
+                element: <EntityPage />,
                 loader: ({ request: { signal } }) => {
                   return fetch('http://localhost:8080/api/subjects', signal);
                 },
               },
               {
                 path: ':id',
-                element: <SubjectDetailsPage />,
+                element: <EntityDetailsPage />,
                 loader: ({ params: { id }, request: { signal } }) => {
                   return fetch(
                     `http://localhost:8080/api/subjects/${id}`,
@@ -54,14 +47,14 @@ export const router = createBrowserRouter([
             children: [
               {
                 index: true,
-                element: <CoursesPage />,
+                element: <EntityPage />,
                 loader: ({ request: { signal } }) => {
                   return fetch('http://localhost:8080/api/courses', signal);
                 },
               },
               {
                 path: ':id',
-                element: <CourseDetailsPage />,
+                element: <EntityDetailsPage />,
                 loader: ({ params: { id }, request: { signal } }) => {
                   return fetch(
                     `http://localhost:8080/api/courses/${id}`,
@@ -76,14 +69,14 @@ export const router = createBrowserRouter([
             children: [
               {
                 index: true,
-                element: <ProgrammesPage />,
+                element: <EntityPage />,
                 loader: ({ request: { signal } }) => {
                   return fetch('http://localhost:8080/api/programmes', signal);
                 },
               },
               {
                 path: ':id',
-                element: <ProgrammeDetailsPage />,
+                element: <EntityDetailsPage />,
                 loader: ({ params: { id }, request: { signal } }) => {
                   return fetch(
                     `http://localhost:8080/api/programmes/${id}`,
@@ -98,7 +91,7 @@ export const router = createBrowserRouter([
             children: [
               {
                 index: true,
-                element: <UniversitiesPage />,
+                element: <EntityPage />,
                 loader: ({ request: { signal } }) => {
                   return fetch(
                     'http://localhost:8080/api/universities',
@@ -108,7 +101,7 @@ export const router = createBrowserRouter([
               },
               {
                 path: ':id',
-                element: <UniversityDetailsPage />,
+                element: <EntityDetailsPage />,
                 loader: ({ params: { id }, request: { signal } }) => {
                   return fetch(
                     `http://localhost:8080/api/universities/${id}`,
