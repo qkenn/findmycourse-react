@@ -21,16 +21,10 @@ export function searchProgrammes(
   })
     .then((res) => {
       if (res.status >= 400) {
-        switch (true) {
-          case res.status === 404:
-            throw new Error('No Match');
-          case res.status >= 400 && res.status < 500:
-            throw new Error('Client Error');
-          case res.status >= 500 && res.status < 600:
-            throw new Error('Server Error');
-          default:
-            throw new Error('Something went wrong');
-        }
+        throw {
+          status: res.status,
+          message: `Error ${res.status}: ${res.statusText}`,
+        };
       }
 
       return res.json();
@@ -41,7 +35,7 @@ export function searchProgrammes(
     .catch((e) => {
       programmesDispatch({
         type: 'SEARCH_ERROR',
-        payload: { errorMessage: e.message, q },
+        payload: { error: { message: e.message, status: e.status } },
       });
     });
 }

@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-export function HomeProgrammeCard({
+export default function SearchResultCard({
   name,
   id,
   university,

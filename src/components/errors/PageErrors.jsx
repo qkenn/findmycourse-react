@@ -1,4 +1,4 @@
-import { CenteredContainer } from './Containers';
+import { CenteredContainer } from '../Containers';
 
 export function AppErrorPage() {
   return (

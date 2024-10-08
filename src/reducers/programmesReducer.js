@@ -1,12 +1,10 @@
-export function programmesReducer(programmes, { type, payload }) {
+export function programmesReducer(state, { type, payload }) {
   switch (type) {
     case 'SEARCH_START':
       return {
         isLoading: true,
       };
     case 'SEARCH_SUCCESS':
-      console.log(payload.data);
-
       return {
         query: payload.q,
         isLoading: false,
@@ -18,10 +16,10 @@ export function programmesReducer(programmes, { type, payload }) {
     case 'SEARCH_ERROR':
       return {
         isLoading: false,
-        errorMessage: payload.errorMessage,
+        error: payload.error,
         query: payload.q,
       };
     default:
-      return programmes;
+      throw new Error('invalid action');
   }
 }

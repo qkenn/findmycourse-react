@@ -3,8 +3,8 @@ import { Hero } from '../components/Hero';
 import { programmesReducer } from '../reducers/programmesReducer';
 import { FiltersReducer } from '../reducers/filtersReducer';
 import { searchProgrammes } from '../utils/searchProgrammes';
-import ProgrammesGrid from '../components/ProgrammesGrid';
 import Features from '../components/Features';
+import FilterableSearchResults from '../components/FiltarableSearchResults';
 
 export const ProgrammeContext = createContext();
 
@@ -14,7 +14,7 @@ export default function HomePage() {
     universityIds: [],
     subjectIds: [],
   });
-  const [initialized, setInitialized] = useState(false);
+  const [reveal, setReveal] = useState(false);
 
   return (
     <>
@@ -25,16 +25,16 @@ export default function HomePage() {
           searchProgrammes,
           filtersDispatch,
           filters,
-          initialize: () => {
-            if (!initialized) {
-              setInitialized(true);
+          revealSearchResults: () => {
+            if (!reveal) {
+              setReveal(true);
             }
           },
         }}
       >
         <Hero />
 
-        {initialized && <ProgrammesGrid />}
+        {reveal && <FilterableSearchResults />}
       </ProgrammeContext.Provider>
 
       <Features />

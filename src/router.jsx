@@ -2,7 +2,7 @@ import { createBrowserRouter } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import { MainLayout } from './layouts/MainLayout';
 import { ExplorePage } from './pages/ExplorePage';
-import { AppErrorPage, NotFoundPage } from './components/Erros';
+import { AppErrorPage, NotFoundPage } from './components/errors/PageErrors';
 import EntityDetailsPage from './pages/EntityDetailsPage';
 import { EntityPage } from './pages/EntityPage';
 

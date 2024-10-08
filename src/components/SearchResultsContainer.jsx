@@ -1,11 +1,11 @@
 import { useContext } from 'react';
 import { ProgrammeContext } from '../pages/HomePage';
-import { HomeProgrammeCard } from './HomeProgrammeCard';
-import SearchError from './SearchError';
 import { PageLink, PaginationWrapper } from './Pagination';
 import { SearchResultsSkelton } from './Skeltons';
+import SearchResultCard from './SearchResultCard';
+import { SearchError } from './errors/SearchErrors';
 
-export function HomeProgrammes() {
+export default function SearchResultsContainer() {
   const { programmes, searchProgrammes, programmesDispatch } =
     useContext(ProgrammeContext);
   const pagesCount =
@@ -16,12 +16,15 @@ export function HomeProgrammes() {
   return (
     <section className="md:col-span-8">
       <ul className="flex flex-col gap-10">
-        {programmes?.results?.map((p) => (
-          <HomeProgrammeCard key={p.id} {...p} />
+        {programmes?.results?.map((result) => (
+          <SearchResultCard key={result.id} {...result} />
         ))}
 
-        {programmes.errorMessage && (
-          <SearchError errorMessage={programmes.errorMessage} />
+        {programmes.error && (
+          <SearchError
+            status={programmes?.error?.status}
+            message={programmes?.error?.message}
+          />
         )}
 
         {programmes.isLoading && <SearchResultsSkelton />}

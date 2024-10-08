@@ -6,7 +6,7 @@ import SearchBtn from './SearchBtn';
 export default function SearchForm() {
   const searchInputRef = useRef(null);
 
-  const { searchProgrammes, programmesDispatch, initialize } =
+  const { searchProgrammes, programmesDispatch, revealSearchResults } =
     useContext(ProgrammeContext);
 
   return (
@@ -15,7 +15,7 @@ export default function SearchForm() {
       onSubmit={(e) => {
         e.preventDefault();
         searchProgrammes(programmesDispatch, searchInputRef.current.value);
-        initialize();
+        revealSearchResults();
       }}
       autoComplete="off"
     >

@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { ProgrammeContext } from '../pages/HomePage';
 import clsx from 'clsx';
 
-export function PaginatedResultsDetails() {
+export function ResultsDetails() {
   const { programmes } = useContext(ProgrammeContext);
 
   return (
