@@ -8,7 +8,7 @@ import Features from '../components/Features';
 
 export const ProgrammeContext = createContext();
 
-export function HomePage() {
+export default function HomePage() {
   const [programmes, programmesDispatch] = useReducer(programmesReducer, {});
   const [filters, filtersDispatch] = useReducer(FiltersReducer, {
     universityIds: [],

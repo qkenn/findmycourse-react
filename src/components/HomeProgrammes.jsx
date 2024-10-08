@@ -2,11 +2,12 @@ import { useContext } from 'react';
 import { ProgrammeContext } from '../pages/HomePage';
 import { HomeProgrammeCard } from './HomeProgrammeCard';
 import { Loading } from './Loading';
-import PaginationLink from './PaginationLink';
 import SearchError from './SearchError';
+import { PageLink, PaginationWrapper } from './Pagination';
 
 export function HomeProgrammes() {
-  const { programmes } = useContext(ProgrammeContext);
+  const { programmes, searchProgrammes, programmesDispatch } =
+    useContext(ProgrammeContext);
   const pagesCount =
     (programmes.count || 0) <= (programmes.pageSize || 8)
       ? 1
@@ -15,10 +16,9 @@ export function HomeProgrammes() {
   return (
     <section className="md:col-span-8">
       <ul className="flex flex-col gap-10">
-        {programmes.results &&
-          programmes.results.map((p) => (
-            <HomeProgrammeCard key={p.id} {...p} />
-          ))}
+        {programmes?.results?.map((p) => (
+          <HomeProgrammeCard key={p.id} {...p} />
+        ))}
 
         {programmes.errorMessage && (
           <SearchError errorMessage={programmes.errorMessage} />
@@ -26,12 +26,23 @@ export function HomeProgrammes() {
 
         {programmes.isLoading && <Loading cardsCount={6} page="home" />}
 
-        {programmes.count && programmes.results && (
-          <div className="flex justify-center gap-3">
-            {[...Array(pagesCount)].map((_, index) => (
-              <PaginationLink key={index} index={index} />
-            ))}
-          </div>
+        {programmes.results && (
+          <PaginationWrapper>
+            {[...Array(pagesCount)].map((_, index) => {
+              const page = index + 1;
+
+              return (
+                <PageLink
+                  key={index}
+                  page={page}
+                  active={page === programmes.page}
+                  search={() =>
+                    searchProgrammes(programmesDispatch, programmes.query, page)
+                  }
+                />
+              );
+            })}
+          </PaginationWrapper>
         )}
       </ul>
     </section>
