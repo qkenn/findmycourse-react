@@ -1,13 +1,13 @@
 import { useLoaderData, useLocation, useNavigation } from 'react-router-dom';
-import { Breadcrumb } from '../components/navigation/BreadCrumb';
-import { CenteredContainer, TwoColGrid } from '../components/Containers';
+import { Breadcrumb } from '../navigation/BreadCrumb';
+import { CenteredContainer, TwoColGrid } from '../Containers';
 import {
   CourseCard,
   ProgrammeCard,
   SubjectCard,
   UniversityCard,
-} from '../components/Cards';
-import { EntityDetailsSkelton } from '../components/Skeltons';
+} from '../explore/Cards';
+import { EntityDetailsSkelton } from '../Skeltons';
 
 export function EntityPage() {
   const { state } = useNavigation();

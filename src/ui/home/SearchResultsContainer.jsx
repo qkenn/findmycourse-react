@@ -1,9 +1,9 @@
 import { useContext } from 'react';
 import { ProgrammeContext } from '../pages/HomePage';
 import { PageLink, PaginationWrapper } from './Pagination';
-import { SearchResultsSkelton } from './Skeltons';
+import { SearchResultsSkelton } from '../Skeltons';
 import SearchResultCard from './SearchResultCard';
-import { SearchError } from './errors/SearchErrors';
+import { SearchError } from '../errors/SearchErrors';
 
 export default function SearchResultsContainer() {
   const { programmes, searchProgrammes, programmesDispatch } =

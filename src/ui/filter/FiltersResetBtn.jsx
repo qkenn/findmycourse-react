@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { ProgrammeContext } from '../../pages/HomePage';
+import { ProgrammeContext } from '../pages/HomePage';
 
 export default function FiltersResetBtn({ universitiesCount, subjectsCount }) {
   const { filtersDispatch, searchProgrammes, programmesDispatch, programmes } =

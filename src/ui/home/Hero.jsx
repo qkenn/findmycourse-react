@@ -1,4 +1,4 @@
-import SearchForm from './search/SearchForm';
+import SearchForm from './SearchForm';
 
 export function Hero() {
   return (

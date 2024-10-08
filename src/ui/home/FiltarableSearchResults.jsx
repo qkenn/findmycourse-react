@@ -1,9 +1,9 @@
 import { useContext } from 'react';
-import { FiltersContainer } from './filter/FiltersContainer';
-import { ProgrammeContext } from '../pages/HomePage';
 import { ResultsDetails } from './Pagination';
-import { CenteredContainer } from './Containers';
 import SearchResultsContainer from './SearchResultsContainer';
+import { FiltersContainer } from '../filter/FiltersContainer';
+import { ProgrammeContext } from '../pages/HomePage';
+import { CenteredContainer } from '../Containers';
 
 export default function FilterableSearchResults() {
   const { programmes } = useContext(ProgrammeContext);

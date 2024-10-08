@@ -1,11 +1,11 @@
 import { useLoaderData, useLocation } from 'react-router-dom';
-import { Breadcrumb } from '../components/navigation/BreadCrumb';
+import { Breadcrumb } from '../navigation/BreadCrumb';
 import {
   CourseDetails,
   ProgrammeDetails,
   SubjectDetails,
   UniversityDetails,
-} from '../components/EntityDetails';
+} from '../explore/EntityDetails';
 
 export default function EntityDetailsPage() {
   const data = useLoaderData();

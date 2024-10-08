@@ -1,10 +1,10 @@
 import { createBrowserRouter } from 'react-router-dom';
-import HomePage from './pages/HomePage';
-import { MainLayout } from './layouts/MainLayout';
-import { ExplorePage } from './pages/ExplorePage';
-import { AppErrorPage, NotFoundPage } from './components/errors/PageErrors';
-import EntityDetailsPage from './pages/EntityDetailsPage';
-import { EntityPage } from './pages/EntityPage';
+import { MainLayout } from './ui/layouts/MainLayout';
+import { AppErrorPage, NotFoundPage } from './ui/errors/PageErrors';
+import EntityDetailsPage from './ui/pages/EntityDetailsPage';
+import { EntityPage } from './ui/pages/EntityPage';
+import HomePage from './ui/pages/HomePage';
+import { ExplorePage } from './ui/pages/ExplorePage';
 
 export const router = createBrowserRouter([
   {

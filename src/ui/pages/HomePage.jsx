@@ -1,10 +1,10 @@
 import { createContext, useReducer, useState } from 'react';
-import { Hero } from '../components/Hero';
-import { programmesReducer } from '../reducers/programmesReducer';
-import { FiltersReducer } from '../reducers/filtersReducer';
-import { searchProgrammes } from '../utils/searchProgrammes';
-import Features from '../components/Features';
-import FilterableSearchResults from '../components/FiltarableSearchResults';
+import { Hero } from '../home/Hero';
+import { programmesReducer } from '../../lib/reducers/programmesReducer';
+import { FiltersReducer } from '../../lib/reducers/filtersReducer';
+import { searchProgrammes } from '../../lib/utils/searchProgrammes';
+import Features from '../home/Features';
+import FilterableSearchResults from '../home/FiltarableSearchResults';
 
 export const ProgrammeContext = createContext();
 

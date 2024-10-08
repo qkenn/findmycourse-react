@@ -1,8 +1,8 @@
 import { useContext } from 'react';
-import subjects from '../../data/subjects.json';
-import universities from '../../data/universities.json';
-import { ProgrammeContext } from '../../pages/HomePage';
-import { createFilterProps } from '../../utils/createFilterProps';
+import subjects from '../../lib/data/subjects.json';
+import universities from '../../lib/data/universities.json';
+import { ProgrammeContext } from '../pages/HomePage';
+import { createFilterProps } from '../../lib/utils/createFilterProps';
 import FiltersResetBtn from './FiltersResetBtn';
 import FilterSelectBtn from './FilterSelectBtn';
 
