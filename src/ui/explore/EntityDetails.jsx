@@ -9,13 +9,13 @@ export function CourseDetails({ data }) {
         <h3 className="text-2xl">Programmes</h3>
         {data.programmes.length > 0 && (
           <ul className="mt-5">
-            {data.programmes.map((c) => (
-              <li key={c.id}>
+            {data.programmes.map((course) => (
+              <li key={course.id}>
                 <Link
-                  to={`/explore/programmes/${c.id}`}
+                  to={`/explore/programmes/${course.id}`}
                   className="hover:underline"
                 >
-                  ✳ {c.name}
+                  ✳ {course.name}
                 </Link>
               </li>
             ))}
@@ -35,13 +35,13 @@ export function SubjectDetails({ data }) {
         <h3 className="text-2xl">Courses</h3>
         {data.courses.length > 0 && (
           <ul className="mt-5">
-            {data.courses.map((c) => (
-              <li key={c.id}>
+            {data.courses.map((course) => (
+              <li key={course.id}>
                 <Link
-                  to={`/explore/courses/${c.id}`}
+                  to={`/explore/courses/${course.id}`}
                   className="hover:underline"
                 >
-                  ✳ {c.name}
+                  ✳ {course.name}
                 </Link>
               </li>
             ))}
